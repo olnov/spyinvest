@@ -3,12 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger-output.json')
 const { syncDatabase } = require ('./db/db');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+
 
 var app = express();
 
@@ -44,5 +46,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
