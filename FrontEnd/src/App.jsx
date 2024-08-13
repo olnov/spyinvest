@@ -2,6 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import PortfolioCard from './components/portfolio/PortfolioCard'
+import PortfolioList from './components/portfolio/PortfolioList'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,6 +30,12 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      {/* <div className="portfolios"> Added portfolio div to test props coming through. Hardcoded for now */}
+        {/* < PortfolioCard portfolioName="Portfolio 1" totalInvestment="1000" pAndL="200" percPAndL="20%" lastUpdated="2021-09-01" />
+      </div> */}
+      <div className="portfolios">
+        < PortfolioList />
+      </div>
     </>
   )
 }
