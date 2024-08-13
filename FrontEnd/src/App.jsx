@@ -30,10 +30,10 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      {/* <div className="portfolios"> Added portfolio div to test props coming through. Hardcoded for now */}
+      {/* JK: <div className="portfolios"> Added portfolio div to test props coming through. Hardcoded for now */}
         {/* < PortfolioCard portfolioName="Portfolio 1" totalInvestment="1000" pAndL="200" percPAndL="20%" lastUpdated="2021-09-01" />
       </div> */}
-      <div className="portfolios">
+      <div className="portfolios"> {/* JK: Added div to render PortfolioList, will be moved to a page when appropriate */}
         < PortfolioList />
       </div>
     </>
