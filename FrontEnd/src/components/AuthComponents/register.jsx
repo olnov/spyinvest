@@ -11,14 +11,12 @@ export const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
-    const [photo, setPhoto] = useState('');
-    const [gender, setGender] = useState('');
-    const [dob, setDob] = useState('');
+    
     const navigate = useNavigate();
     const {updateLoginStatus} = useOutletContext();
 
     const handleChange = (e) => {
-        functions = [setEmail, setPassword, setConfirmPassword, setName, setSurname, setPhoto, setGender, setDob];
+        functions = [setEmail, setPassword, setConfirmPassword, setName, setSurname];
         targets = ['email', 'password', 'confirmPassword', 'name', 'surname', 'photo', 'gender', 'dob'];
 
         for (let i = 0; i < functions.length; i++) {
@@ -37,7 +35,7 @@ export const Register = () => {
                 const userId = await getUserId(token);
                 localStorage.setItem('userId', userId);
                 updateLoginStatus();
-                navigate('/portfolio');
+                navigate('/onboarding');
 
             } else {
                 alert('Passwords do not match');
@@ -61,8 +59,6 @@ export const Register = () => {
                 <input type='text' name='name' value={name} onChange={handleChange} required/>
                 <label>Surname</label>
                 <input type='text' name='surname' value={surname} onChange={handleChange} required/>
-                <label>Photo</label>
-                <input type='text' name='photo' value={photo} onChange={handleChange} required/>
                 </form>
                 </div>
     )
