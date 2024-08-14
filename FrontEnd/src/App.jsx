@@ -5,6 +5,7 @@ import './App.css'
 import PortfolioCard from './components/portfolio/PortfolioCard'
 import PortfolioList from './components/portfolio/PortfolioList'
 import MyPortfolio from './pages/MyPortfolio'
+import CreatePortfolioForm from './components/input/CreatePortfolioForm'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,11 +32,8 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      {/* JK: <div className="portfolios"> Added portfolio div to test props coming through. Hardcoded for now */}
-      {/* < PortfolioCard portfolioName="Portfolio 1" totalInvestment="1000" pAndL="200" percPAndL="20%" lastUpdated="2021-09-01" />
-      </div> */}
-      <div className="portfolios"> {/* JK: Added div to render PortfolioList, will be moved to a page when appropriate */}
-        <MyPortfolio />
+      <div>
+        <CreatePortfolioForm /> (/* will be replaced with MyPortfolio component */)
       </div>
     </>
   )
