@@ -1,16 +1,18 @@
 import { render } from '@testing-library/react';
 import MyPortfolio from '../../src/pages/MyPortfolio';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 
 describe('My Portfolio', () => {
-    it('renders correctly', () => {
+    it('renders correctly', async () => {
         render(<MyPortfolio />);
         expect(document.querySelector("h1").textContent).toBe('My Portfolio')
-        expect(document.querySelector('.port-card__name1').textContent).toBe('Shares');
-        expect(document.querySelector('.port-card__total-investment1').textContent).toBe('1000');
-        expect(document.querySelector('.port-card__p-and-l1').textContent).toBe('200');
-        expect(document.querySelector('.port-card__perc-p-and-l1').textContent).toBe('20%');
-        expect(document.querySelector('.port-card__last-updated1').textContent).toBe('2021-09-01');
         expect(document.querySelector('button').textContent).toBe('Create Portfolio')
+    })
+    it('renders the modal correctly', async () => {
+        render(<MyPortfolio />);
+        const createButton = document.querySelector('button');
+        createButton.click();
+        const modal = document.querySelector('.modal');
+        expect(modal).not.toBeNull();
     })
 })
