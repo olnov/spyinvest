@@ -11,9 +11,9 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 const dbConnection = async () => {
   try {
     await sequelize.authenticate();
-    console.log("[DB-01] Successfully connected to the database.");
+    console.log("[DB-001] Successfully connected to the database.");
   } catch (error) {
-    console.error("[DB-02] Error connecting to the database:", error);
+    console.error("[DB-002] Error connecting to the database:", error);
   }
 };
 
