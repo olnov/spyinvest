@@ -18,7 +18,7 @@ exports.createPortfolio = async (req,res) => {
         }
         res.status(201).json({ message: "[PORTFOLIOS-001] Protfolio successfully create", newPortfolio });
     }catch(error){
-        res.status(500).json({ message: "[PORTFOLIOS-002] Can't crreate portfolio: ", error: error.message});
+        res.status(500).json({ message: "[PORTFOLIOS-002] Can't create portfolio: ", error: error.message});
     }
 };
 
