@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import PortfolioCard from '../../src/components/portfolio/PortfolioCard';
+import PortfolioCard from '../../../src/components/portfolio/PortfolioCard';
 import { describe, it, expect } from 'vitest';
 
 describe('PortfolioCard', () => {

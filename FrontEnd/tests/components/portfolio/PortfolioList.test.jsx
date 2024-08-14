@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import PortfolioList from '../../src/components/portfolio/PortfolioList';
+import PortfolioList from '../../../src/components/portfolio/PortfolioList';
 import { describe, it, expect } from 'vitest';
 
 describe('PortfolioList', () => {

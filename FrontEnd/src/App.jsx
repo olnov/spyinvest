@@ -2,10 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import PortfolioCard from './components/portfolio/PortfolioCard'
-import PortfolioList from './components/portfolio/PortfolioList'
 import MyPortfolio from './pages/MyPortfolio'
-import CreatePortfolioForm from './components/input/CreatePortfolioForm'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -33,7 +30,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
       <div>
-        <CreatePortfolioForm /> (/* will be replaced with MyPortfolio component */)
+        <MyPortfolio />
       </div>
     </>
   )
