@@ -26,13 +26,13 @@ const MyPortfolio = () => {
     <>
       <h1>My Portfolio</h1>
       <PortfolioList />
-      <button data-bs-toggle="modal" data-bs-target="#create-modal">
+      <button data-bs-toggle="modal" data-bs-target="#create-portfolio-modal">
         Create Portfolio
       </button>
 
       <div
         className="modal fade"
-        id="create-modal"
+        id="create-portfolio-modal"
         tabIndex="-1"
         role="dialog"
         aria-labelledby="createModalLabel"
