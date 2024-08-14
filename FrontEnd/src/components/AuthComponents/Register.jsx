@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { register } from "../../services/authServices";
+import { register , login} from "../../services/authServices";
+
 
 import Modal from 'react-modal';
 // import password validator
@@ -17,7 +18,7 @@ export const Register = () => {
 
     const handleChange = (e) => {
         const functions = [setEmail, setPassword, setConfirmPassword, setName, setSurname];
-        const targets = ['email', 'password', 'confirmPassword', 'name', 'surname', 'photo', 'gender', 'dob'];
+        const targets = ['email', 'password', 'confirmPassword', 'name', 'surname'];
 
         for (let i = 0; i < functions.length; i++) {
             if (e.target.name === targets[i]) {
@@ -30,11 +31,11 @@ export const Register = () => {
         e.preventDefault();
         try {
             if (password === confirmPassword) {
-                const token = await register(email, password, name, surname, photo,gender, dob);
-                localStorage.setItem('token', token);
-                const userId = await getUserId(token);
-                localStorage.setItem('userId', userId);
-                // updateLoginStatus();
+                const user = await register(email, password, name, surname);
+                const data = await login(email, password)
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('userId', data.userId);
+                // updateLoginStatus()
                 navigate('/onboarding');
 
             } else {
@@ -52,13 +53,14 @@ export const Register = () => {
                 <label>Email</label>
                 <input type='email' name='email' value={email} onChange={handleChange} required/>
                 <label>Password</label>
-                <input type='password' name='password' value={password} onChange={handleChange} required/>
+                <input type='password' name='password' autoComplete="true" value={password} onChange={handleChange} required/>
                 <label>Confirm Password</label>
-                <input type='password' name='confirmPassword' value={confirmPassword} onChange={handleChange} required/>
+                <input type='password' name='confirmPassword' autoComplete="true"value={confirmPassword} onChange={handleChange} required/>
                 <label>Name</label>
                 <input type='text' name='name' value={name} onChange={handleChange} required/>
                 <label>Surname</label>
                 <input type='text' name='surname' value={surname} onChange={handleChange} required/>
+                <button type='submit'>Register</button>
                 </form>
                 </div>
     )

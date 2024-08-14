@@ -14,10 +14,9 @@ export const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const token = await login(email, password);
-            localStorage.setItem('token', token);
-            const userId = await getUserInfo(token);
-            localStorage.setItem('userId', userId);
+            const data = await login(email, password);
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userId', data.userId);
             // updateLoginStatus();
             navigate('/portfolio');
         } catch (error) {
@@ -42,6 +41,7 @@ export const Login = () => {
                     id='email'
                     type='email'
                     name='email'
+                    autoComplete='true'
                     value={email}
                     onChange={handleChange}
                     required
@@ -52,6 +52,7 @@ export const Login = () => {
                     id='password'
                     type='password'
                     name='password'
+                    autoComplete='true'
                     value={password}
                     onChange={handleChange}
                     required

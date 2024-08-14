@@ -1,9 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useOutletContext } from 'react-router-dom';
 import { Login } from '../../src/components/AuthComponents/Login';
-import { it, vi } from 'vitest';
+import {Logout} from '../../src/components/AuthComponents/Logout';
+import { Register } from '../../src/components/AuthComponents/Register';
+import { describe, it, vi } from 'vitest';
 
 // Import the mock setup
 import '@testing-library/jest-dom';
@@ -62,5 +64,6 @@ describe('Login component', () => {
         await userEvent.click(form);
     });
 
-    
 });
+
+// describe('Register component', () => {

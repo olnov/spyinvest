@@ -8,12 +8,16 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Login} from '../components/AuthComponents/Login';
 import {Register} from '../components/AuthComponents/register';
+import {Logout} from '../components/AuthComponents/Logout';
 
 export const Landing = () => {
     const navigate = useNavigate();
     const userId = localStorage.getItem('userId');
     if (userId) {
-        navigate('/portfolio');
+        return (
+            < Logout/>
+        )
+        // navigate('/portfolio');
     } else {
         return (
             <div className='landing-container'>
