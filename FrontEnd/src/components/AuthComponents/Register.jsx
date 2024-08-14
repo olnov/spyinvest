@@ -16,8 +16,8 @@ export const Register = () => {
     // const {updateLoginStatus} = useOutletContext();
 
     const handleChange = (e) => {
-        functions = [setEmail, setPassword, setConfirmPassword, setName, setSurname];
-        targets = ['email', 'password', 'confirmPassword', 'name', 'surname', 'photo', 'gender', 'dob'];
+        const functions = [setEmail, setPassword, setConfirmPassword, setName, setSurname];
+        const targets = ['email', 'password', 'confirmPassword', 'name', 'surname', 'photo', 'gender', 'dob'];
 
         for (let i = 0; i < functions.length; i++) {
             if (e.target.name === targets[i]) {
