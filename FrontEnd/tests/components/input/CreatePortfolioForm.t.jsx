@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import CreatePortfolioForm from '../../../src/components/input/CreatePortfolioForm';
 import { describe, it, expect, vi } from 'vitest';
+import MyPortfolio from '../../../src/pages/MyPortfolio';
 
 describe('CreatePortfolioForm', () => {
         render(<CreatePortfolioForm />);
