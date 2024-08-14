@@ -16,7 +16,4 @@ const Asset = sequelize.define('Asset', {
     timestamps: false,
 });
 
-console.log("Checking Asset model:");
-console.log(Asset === sequelize.models.Asset);
-
 module.exports = Asset;
