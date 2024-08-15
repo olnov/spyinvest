@@ -58,7 +58,7 @@ const User = sequelize.define('User', {
 
 // Function to compare password hashes
 User.prototype.comparePassword = async function(candidatePassword) {
-    return bcrypt.compare(candidatePassword, this.password);
+    return bcrypt.compare(candidatePassword, this.password); 
   };
 
 module.exports = User;

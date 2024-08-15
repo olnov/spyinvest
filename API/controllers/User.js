@@ -9,11 +9,16 @@ exports.createUser = async (req, res) => {
       name,
       surname,
       email,
-      password, // TBD: substitete with hash
+      password, 
       gender,
       birth_date,
       registred_at: new Date(), 
     });
+    // Making sure the email is unique
+    const exisingEmail = await User.findOne({ where: {email: email }});
+    if (exisingEmail) {
+      res.status(409).json({ message: '[USERS-012] Email already exists', exisingEmail });
+    }
     res.status(201).json({ message: '[USERS-001] User created successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ message: '[USERS-002] Error creating user', error: error.message });
@@ -57,10 +62,15 @@ exports.updateUser = async (req, res) => {
       name,
       surname,
       email,
-      password, // TBD: Substitute with hash
+      password, 
       gender,
       birth_date,
     });
+     // Making sure the email is unique
+     const exisingEmail = await User.findOne({ where: {email: email }});
+     if (exisingEmail) {
+       res.status(409).json({ message: '[USERS-012] Email already exists', exisingEmail });
+     };
     res.status(200).json({ message: '[USERS-008] User updated successfully', user });
   } catch (error) {
     res.status(500).json({ message: '[USERS-009] Error updating user', error: error.message });
