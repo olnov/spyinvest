@@ -4,7 +4,6 @@ const User = require('../models/User');
 exports.createUser = async (req, res) => {
   try {
     const { name, surname, email, password, gender, birth_date } = req.body;
-     // Making sure the email is unique
     const exisingEmail = await User.findOne({ where: {email: email }});
     if (exisingEmail) {
       res.status(409).json({ message: '[USERS-012] Email already exists', exisingEmail });
