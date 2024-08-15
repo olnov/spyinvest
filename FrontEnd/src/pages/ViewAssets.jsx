@@ -1,24 +1,71 @@
-import {useState} from 'react'
-
-import ViewAsset from '../components/ViewAsset';
-
-const CheckAssets = () => {
-    const [assets, setAssets] = useState([{ id: 1, assetName: "Portfolio 1", assetId: 1000, datePurchased: 200, dateSell: "20%", quantity: "2021-09-01" }, { id: 2, assetName: "Portfolio 2", assetId: 2000, datePurchased: 400, dateSell: "20%", quantity: "2021-09-01" }, { id: 3, assetName: "Portfolio 3", assetId: 3000, datePurchased: 600, dateSell: "20%", quantity: "2021-09-01" }]); // Hardcoded for now
+import PortfolioList from "../components/portfolio/PortfolioList";
+import { useState } from "react";
+import CreatePortfolioForm from "../components/input/CreatePortfolioForm";
+import { createPortfolio } from "../services/PortfoliosServices";
+const MyPortfolio = () => {
+  const [formData, setFormData] = useState({});
+  const handleChange = (id, value) => {
+    setFormData({ ...formData, [id]: value });
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
+      await createPortfolio(token, formData);
+      setFormData({});
+      window.location.reload();
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <>
-    
-    {assets.map((asset) => (
-        <ViewAsset
-        key = {asset.id}
-        assetName = {asset.assetName}
-        assetId = {asset.id}
-        date_purchased={asset.datePurchased}
-        date_sell={asset.dateSell}
-        quantity={asset.quantity}
-        />
-    ))}
+      <h1>My Portfolio</h1>
+      <PortfolioList />
+      <button data-bs-toggle="modal" data-bs-target="#create-modal">
+        Create Portfolio
+      </button>
+      <div
+        className="modal fade"
+        id="create-modal"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="createModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Create New Portfolio
+              </h5>
+            </div>
+            <div className="modal-body">
+              <CreatePortfolioForm
+                formData={formData}
+                handleChange={handleChange}
+              />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleSubmit}
+              >
+                Create Portfolio
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
-  )
-}
-
-export default CheckAssets
+  );
+};
+export default MyPortfolio;
