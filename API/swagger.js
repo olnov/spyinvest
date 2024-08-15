@@ -1,4 +1,4 @@
-// const swaggerAutogen = require('swagger-autogen')();
+require('dotenv').config();
 const swaggerAutogen = require('swagger-autogen')({ openapi: '3.0.0', debug: true });
 
 
@@ -7,7 +7,7 @@ const doc = {
     title: 'SpyInvest API',
     description: 'API backend for SpyInvest app'
   },
-  host: 'localhost:3000'
+  host: process.env.SWAGGER_BE
 };
 
 
