@@ -6,7 +6,7 @@ import { fetchAssetSymbol } from "../services/assetsServices";
 const ApiView = (props) => {
     console.log("Test :" + props.id)
 
-    const [symbolState, setSymbolState] = useState("")
+    const [symbolTicker, setSymbolTicker] = useState("")
     const [symbolDesc, setSymbolDesc] = useState("")
     const [symbolPrice, setSymbolPrice] = useState(0)
 
@@ -18,7 +18,7 @@ const ApiView = (props) => {
             try {
                 const result = await fetchAssetSymbol(props.id)
                 console.log("The result: " + result)
-                setSymbolState(result.asset)
+                setSymbolTicker(result.asset)
                 setSymbolDesc(result.description)
                 return result.asset
             } catch (err) {
@@ -28,13 +28,13 @@ const ApiView = (props) => {
 
         const externalAPIresponse = async () => {
             try {
-                const result = await fetchPrices(symbolState, "8H")
+                const result = await fetchPrices(symbolTicker, "8H")
 
                 // console.log(result['bars']['AAPL'][0].c)
                 // setSymbolState(result['bars'])
                 console.log(result)
 
-                setSymbolPrice(result['bars'][symbolState][0].c)
+                setSymbolPrice(result['bars'][symbolTicker][0].c)
             } catch (err) {
                 console.log(err)
             }
@@ -48,7 +48,7 @@ const ApiView = (props) => {
 
 
 
-    }, [symbolState])
+    }, [symbolTicker])
 
 
     // useEffect(() => {
@@ -62,7 +62,7 @@ const ApiView = (props) => {
     return (
         <>
             <div>ApiView</div>
-            <h1>{symbolState}</h1>
+            <h1>{symbolTicker}</h1>
             <h1>{symbolDesc}</h1>
             <h1>{symbolPrice}</h1>
 
