@@ -9,7 +9,7 @@ const PortfolioList = () => {
   const fetchPortfolios = async () => {
     try {
       const token = localStorage.getItem("token");
-      const data = await getPortfolios(token);
+      const data = await getPortfolios();
       setPortfolios(data);
     } catch (err) {
       console.error(err);
@@ -27,8 +27,8 @@ const PortfolioList = () => {
         {portfolios.map((portfolio) => (
           <PortfolioCard
             key={portfolio.id}
-            id={portfolio.id}
-            portfolioName={portfolio.portfolioName}
+            portfolioName={portfolio.title}
+            portfolioDescription={portfolio.description}
             totalInvestment={portfolio.totalInvestment}
             pAndL={portfolio.pAndL}
             percPAndL={portfolio.percPAndL}

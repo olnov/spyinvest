@@ -5,6 +5,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Landing from './pages/Landing'
+import MyPortfolio from './pages/MyPortfolio';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       path: "/",
       element: <Landing />,
     },]
+  },
+  {
+    path: "/portfolios",
+    element: <MyPortfolio />,
   }
 ])
 function App() {

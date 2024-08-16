@@ -3,12 +3,13 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 export const getPortfolios = async (token) => {
     const requestOptions = {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
     };
   
-    const response = await fetch(`${BACKEND_URL}/portfolios`, requestOptions); // URL subject to change
+    const response = await fetch(`${BACKEND_URL}/portfolios`); // URL subject to change
+    console.log(response);
   
     console.log(response.status);
   
