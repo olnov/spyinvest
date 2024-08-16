@@ -16,3 +16,20 @@ export const getUserInfo = async (token) => {
     const data = await response.json();
     return data;
   };
+
+  export const updateUserInfo = async (token, userInfo) => {
+    const requestOptions = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(userInfo),
+    };
+    const response = await fetch(`${BACKEND_URL}/users`, requestOptions);
+    if (response.status !== 200) {
+      throw new Error("Unable to update user");
+    }
+    const data = await response.json();
+    return data;
+  }
