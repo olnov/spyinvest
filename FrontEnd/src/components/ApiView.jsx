@@ -3,9 +3,11 @@ import { fetchPrices } from "../services/assetsServices";
 import { fetchAssetSymbol } from "../services/assetsServices";
 
 
-const ApiView = (id) => {
+const ApiView = (props) => {
+    console.log("Test :" + props.id)
 
-    const [symbolState, setSymbolState] = useState("AAPL")
+    const [symbolState, setSymbolState] = useState("")
+    const [symbolDesc, setSymbolDesc] = useState("")
     const [symbolPrice, setSymbolPrice] = useState(0)
 
 
@@ -14,9 +16,10 @@ const ApiView = (id) => {
 
         const internalApi = async () => {
             try {
-                const result = await fetchAssetSymbol(151)
-                // console.log(result)
+                const result = await fetchAssetSymbol(props.id)
+                console.log("The result: " + result)
                 setSymbolState(result.asset)
+                setSymbolDesc(result.description)
                 return result.asset
             } catch (err) {
                 console.log(err)
@@ -31,7 +34,7 @@ const ApiView = (id) => {
                 // setSymbolState(result['bars'])
                 console.log(result)
 
-                setSymbolPrice(result['bars']['AAPL'][0].c)
+                setSymbolPrice(result['bars'][symbolState][0].c)
             } catch (err) {
                 console.log(err)
             }
@@ -45,7 +48,8 @@ const ApiView = (id) => {
 
 
 
-    }, [])
+    }, [symbolState])
+
 
     // useEffect(() => {
     //     const fetchUserData = async () => {
@@ -59,6 +63,7 @@ const ApiView = (id) => {
         <>
             <div>ApiView</div>
             <h1>{symbolState}</h1>
+            <h1>{symbolDesc}</h1>
             <h1>{symbolPrice}</h1>
 
         </>

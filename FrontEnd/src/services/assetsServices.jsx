@@ -1,6 +1,8 @@
-const PlaceHolderSymbol = "AAPL"
+// const PlaceHolderSymbol = ""
 
-export const fetchPrices = async (symbol = PlaceHolderSymbol, timeframe = "8H") => {
+export const fetchPrices = async (symbol, timeframe = "8H") => {
+    console.log("Symbol:" + symbol)
+    console.log(timeframe)
 
     // console.log(symbol)
     const requestOptions = {
@@ -22,7 +24,7 @@ export const fetchPrices = async (symbol = PlaceHolderSymbol, timeframe = "8H") 
 }
 
 
-export const fetchAssetSymbol = async (id = 1) => {
+export const fetchAssetSymbol = async (id) => {
     const response = await fetch(`http://localhost:3000/assets/${id}`)
     const data = await response.json()
     console.log("Here to identify:")
