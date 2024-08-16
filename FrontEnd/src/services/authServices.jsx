@@ -2,7 +2,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 
 export const login = async (email, password) => {
-    const response = await fetch(`${BACKEND_URL}/auth`, {
+    const response = await fetch(`${BACKEND_URL}auth`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ export const login = async (email, password) => {
 }
 
 export const register = async (email, password, name, surname) =>{
-    const response = await fetch(`${BACKEND_URL}/users`, {
+    const response = await fetch(`${BACKEND_URL}auth/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
