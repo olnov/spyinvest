@@ -1,8 +1,8 @@
-import PortfolioList from "../components/portfolio/PortfolioList";
+import ViewAsset from "../components/ViewAsset";
 import { useState } from "react";
 import CreatePortfolioForm from "../components/input/CreatePortfolioForm";
 import { createPortfolio } from "../services/PortfoliosServices";
-const MyPortfolio = () => {
+const MyAssests = () => {
   const [formData, setFormData] = useState({});
   const handleChange = (id, value) => {
     setFormData({ ...formData, [id]: value });
@@ -21,7 +21,7 @@ const MyPortfolio = () => {
   return (
     <>
       <h1>My Portfolio</h1>
-      <PortfolioList />
+      <ViewAsset />
       <button data-bs-toggle="modal" data-bs-target="#create-modal">
         Create Portfolio
       </button>
@@ -68,4 +68,4 @@ const MyPortfolio = () => {
     </>
   );
 };
-export default MyPortfolio;
+export default MyAssests;
