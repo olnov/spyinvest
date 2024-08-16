@@ -7,7 +7,7 @@ import React from 'react';
 // import { Button, Container, Row, Col } from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom';
 import {Login} from '../components/AuthComponents/Login';
-import {Register} from '../components/AuthComponents/register';
+import {Register} from '../components/AuthComponents/Register';
 import {Logout} from '../components/AuthComponents/Logout';
 
 export const Landing = () => {

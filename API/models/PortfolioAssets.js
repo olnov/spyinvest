@@ -58,7 +58,7 @@ const PortfolioAsset = sequelize.define('PortfolioAsset', {
 Portfolio.belongsToMany(Asset, { through: PortfolioAsset, foreignKey: 'portfolio_id' });
 Asset.belongsToMany(Portfolio, { through: PortfolioAsset, foreignKey: 'asset_id' });
 
-console.log("Checking PortfolioAsset model:");
-console.log(PortfolioAsset === sequelize.models.PortfolioAsset);
+PortfolioAsset.belongsTo(Portfolio, { foreignKey: 'portfolio_id' });
+PortfolioAsset.belongsTo(Asset, { foreignKey: 'asset_id' });
 
 module.exports = PortfolioAsset;

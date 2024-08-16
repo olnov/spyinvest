@@ -35,7 +35,4 @@ const Portfolio = sequelize.define('Portfolio', {
 User.hasMany(Portfolio, { foreignKey: 'user_id' });
 Portfolio.belongsTo(User, { foreignKey: 'user_id' });
 
-console.log("Checking Portfolio model:");
-console.log(Portfolio === sequelize.models.Portfolio);
-
 module.exports = Portfolio;
