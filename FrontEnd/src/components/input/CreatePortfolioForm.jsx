@@ -15,12 +15,12 @@ const CreatePortfolioForm = ({ formData, handleChange }) => {
           placeholder="Description (optional)"
           onChange={(e) => handleChange(e.target.id, e.target.value)}
         />
-        <input
+{/*         <input
           id="user_id"
           value={formData.user_id || ""}
           placeholder="user_id"
           onChange={(e) => handleChange(e.target.id, e.target.value)}
-        />
+        /> */}
       </>
     );
   };
