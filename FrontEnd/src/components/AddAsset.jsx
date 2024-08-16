@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { createAsset } from '../services/assetServices'
+import { createAsset } from '../services/portfolioAssetServices'
 
 
 

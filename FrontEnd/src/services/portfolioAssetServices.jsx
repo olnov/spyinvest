@@ -2,7 +2,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 export const createAsset = async ( portfolioId, assetName, assetSymbol, datePurchased, dateSell, quantity, buyingPrice, sellingPrice, token) => {
     //tbc//
-    const response = await fetch(`${BACKEND_URL}/assets`, {
+    const response = await fetch(`${BACKEND_URL}/portfolio_assets`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
