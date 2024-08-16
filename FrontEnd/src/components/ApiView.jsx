@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchPrices } from "../services/assetsServices";
-import { fetchSymbol } from "../services/assetsServices";
+import { fetchAssetSymbol } from "../services/assetsServices";
 
 
 const ApiView = (id) => {
@@ -14,20 +14,22 @@ const ApiView = (id) => {
 
         const internalApi = async () => {
             try {
-                const result = await fetchSymbol(id)
+                const result = await fetchAssetSymbol(151)
                 // console.log(result)
-                return result
+                setSymbolState(result.asset)
+                return result.asset
             } catch (err) {
                 console.log(err)
             }
         }
 
-        const response = async () => {
+        const externalAPIresponse = async () => {
             try {
-                const result = await fetchPrices(internalApi(), "8H")
+                const result = await fetchPrices(symbolState, "8H")
 
                 // console.log(result['bars']['AAPL'][0].c)
                 // setSymbolState(result['bars'])
+                console.log(result)
 
                 setSymbolPrice(result['bars']['AAPL'][0].c)
             } catch (err) {
@@ -35,8 +37,8 @@ const ApiView = (id) => {
             }
         }
 
-        // internalApi()
-        response()
+        internalApi()
+        externalAPIresponse()
 
 
 

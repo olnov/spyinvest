@@ -22,10 +22,10 @@ export const fetchPrices = async (symbol = PlaceHolderSymbol, timeframe = "8H") 
 }
 
 
-export const fetchSymbol = async (id = 1) => {
+export const fetchAssetSymbol = async (id = 1) => {
     const response = await fetch(`http://localhost:3000/assets/${id}`)
     const data = await response.json()
     console.log("Here to identify:")
-    // console.log(data)
+    console.log(data)
     return data
 }
