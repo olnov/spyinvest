@@ -2,12 +2,13 @@ const User = require('../models/User');
 
 // Create a new user
 exports.createUser = async (req, res) => {
-  try {
-    const { name, surname, email, password, gender, birth_date } = req.body;
-    const exisingEmail = await User.findOne({ where: {email: email }});
-    if (exisingEmail) {
-      res.status(409).json({ message: '[USERS-012] Email already exists', exisingEmail });
-    }
+  const { name, surname, email, password, gender, birth_date } = req.body;
+  const exisingEmail = await User.findOne({ where: {email: email }});
+  if (exisingEmail) {
+    res.status(409).json({ message: '[USERS-012] Email already exists', exisingEmail });
+    
+  } else {
+  try { 
     const newUser = await User.create({
       name,
       surname,
@@ -22,6 +23,7 @@ exports.createUser = async (req, res) => {
     res.status(500).json({ message: '[USERS-002] Error creating user', error: error.message });
   }
 };
+}
 
 // Retrieve all users
 exports.getAllUsers = async (req, res) => {
