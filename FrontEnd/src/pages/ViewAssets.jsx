@@ -1,71 +1,47 @@
 import ViewAsset from "../components/ViewAsset";
-import { useState } from "react";
-import CreatePortfolioForm from "../components/input/CreatePortfolioForm";
+import { useEffect, useState } from "react";
 import { createPortfolio } from "../services/PortfoliosServices";
-const MyAssests = () => {
-  const [formData, setFormData] = useState({});
-  const handleChange = (id, value) => {
-    setFormData({ ...formData, [id]: value });
-  };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const token = localStorage.getItem("token");
-      await createPortfolio(token, formData);
-      setFormData({});
-      window.location.reload();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  return (
-    <>
-      <h1>My Portfolio</h1>
-      <ViewAsset />
-      <button data-bs-toggle="modal" data-bs-target="#create-modal">
-        Create Portfolio
-      </button>
-      <div
-        className="modal fade"
-        id="create-modal"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="createModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Create New Portfolio
-              </h5>
-            </div>
-            <div className="modal-body">
-              <CreatePortfolioForm
-                formData={formData}
-                handleChange={handleChange}
-              />
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={handleSubmit}
-              >
-                Create Portfolio
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+import { getPortfolioAssetsByPortfolioId } from "../services/portfolioAssetServices";
+import { getAllPortfolioAssets } from "../../../API/controllers/portfolioAssets";
+
+
+const MyAssests = (props) => {
+  const portfolioId = props.portfolioId
+  const [allAssests, setAllAssests] = useState([]);
+  const fetchAllAssests = async () => {
+    try { 
+    const data = await getPortfolioAssetsByPortfolioId(portfolioId, localStorage.getItem("token"));
+    setAllAssests(data);
+  } catch(err) {
+    console.error(err);
+  }
+}, [];
+
+
+
+useEffect(() => {
+  fetchAllAssests();
+}, []);
+  
+    return (
+      <>
+    
+    {assets.map((asset) => (
+        <PortfolioAsset
+        key = {asset.id}
+        assetName = {asset.assetName}
+        assetId = {asset.id}
+        date_purchased={asset.datePurchased}
+        date_sell={asset.dateSell}
+        quantity={asset.quantity}
+        />
+      ))}
+    <button link to = "/addAsset">Add Asset</button>
     </>
-  );
-};
+    );
+
+}
+  // This page is to view all account specific assets
+
+
 export default MyAssests;
