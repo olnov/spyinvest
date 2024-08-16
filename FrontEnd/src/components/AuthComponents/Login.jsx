@@ -18,7 +18,7 @@ export const Login = () => {
             localStorage.setItem('token', data.token);
             localStorage.setItem('userId', data.userId);
             // updateLoginStatus();
-            navigate('/portfolio');
+            navigate('/portfolios');
         } catch (error) {
             console.error(error);
         }
