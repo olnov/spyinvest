@@ -6,7 +6,7 @@ exports.createUser = async (req, res) => {
     const { name, surname, email, password, gender, birth_date } = req.body;
     const exisingEmail = await User.findOne({ where: {email: email }});
     if (exisingEmail) {
-      res.status(409).json({ message: '[USERS-012] Email already exists', exisingEmail });
+      return res.status(409).json({ message: '[USERS-012] Email already exists', exisingEmail });
     }
     const newUser = await User.create({
       name,
@@ -20,7 +20,7 @@ exports.createUser = async (req, res) => {
     res.status(201).json({ message: '[USERS-001] User created successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ message: '[USERS-002] Error creating user', error: error.message });
-  }
+  } 
 };
 
 // Retrieve all users
@@ -59,7 +59,7 @@ exports.updateUser = async (req, res) => {
      // Making sure the email is unique
     const exisingEmail = await User.findOne({ where: {email: email }});
     if (exisingEmail) {
-        res.status(409).json({ message: '[USERS-012] Email already exists', exisingEmail });
+        return res.status(409).json({ message: '[USERS-012] Email already exists', exisingEmail });
     };
     await user.update({
       name: name || user.name,

@@ -5,6 +5,10 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Landing from './pages/Landing'
+import { Test } from "./pages/Test";
+import { SignUp } from "./pages/SingnUp/SignUp";
+import { Login } from "./pages/Login/Login";
+import Portfolio from './pages/Portfolio/Portfolio';
 
 const router = createBrowserRouter([
   {
@@ -13,7 +17,24 @@ const router = createBrowserRouter([
     {
       path: "/",
       element: <Landing />,
-    },]
+    },
+    {
+      path: "/test",
+      element: <Test />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: '/signup',
+      element: <SignUp />,
+    },
+    {
+      path: '/portfolio',
+      element: <Portfolio />,
+    }
+  ]
   }
 ])
 function App() {
