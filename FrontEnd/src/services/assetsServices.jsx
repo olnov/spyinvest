@@ -1,15 +1,15 @@
-// const PlaceHolderSymbol = ""
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+const ALPACA_KEY = import.meta.env.VITE_APCA_API_KEY_ID
+const ALPACA_SEC = import.meta.env.VITE_APCA_API_SECRET_KEY
+
 
 export const fetchPrices = async (symbol, timeframe = "8H") => {
-    console.log("Symbol:" + symbol)
-    console.log(timeframe)
 
-    // console.log(symbol)
     const requestOptions = {
         method: "GET",
         headers: {
-            'APCA-API-KEY-ID': "PK1ODACYZZ6N9AZ5UFC5",
-            "APCA-API-SECRET-KEY": "jbw0HcX0zbk3Yb3p7nKbdBPn6Q3tF6wADuMP7Uie"
+            'APCA-API-KEY-ID': ALPACA_KEY,
+            "APCA-API-SECRET-KEY": ALPACA_SEC,
 
         },
     };
@@ -17,17 +17,11 @@ export const fetchPrices = async (symbol, timeframe = "8H") => {
     const data = await response.json()
 
     return data
-
-    // setSymbolState(symbol)
-    // setSymbolPrice(data.bars[symbol][0].c)
-    // return console.log(data.bars[symbol][0].c)
 }
 
 
 export const fetchAssetSymbol = async (id) => {
-    const response = await fetch(`http://localhost:3000/assets/${id}`)
+    const response = await fetch(`${BACKEND_URL}/assets/${id}`)
     const data = await response.json()
-    console.log("Here to identify:")
-    console.log(data)
     return data
 }

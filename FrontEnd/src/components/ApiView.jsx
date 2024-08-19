@@ -61,7 +61,7 @@ const ApiView = (props) => {
 
     return (
         <>
-            <div>ApiView</div>
+            <div>Single Asset View</div>
             <h1>{symbolTicker}</h1>
             <h1>{symbolDesc}</h1>
             <h1>{symbolPrice}</h1>
