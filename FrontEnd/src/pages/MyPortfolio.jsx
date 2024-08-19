@@ -3,6 +3,8 @@ import { useState } from "react";
 import CreatePortfolioForm from "../components/input/CreatePortfolioForm";
 import { createPortfolio } from "../services/PortfoliosServices";
 
+// My portfolio  -> portfolio list  | create portfolio
+
 const MyPortfolio = () => {
   const [formData, setFormData] = useState({});
 

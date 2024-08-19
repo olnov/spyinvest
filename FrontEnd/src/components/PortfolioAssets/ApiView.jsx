@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { fetchPrices } from "../services/assetsServices";
-import { fetchAssetSymbol } from "../services/assetsServices";
+import { fetchPrices } from "../../services/assetsServices";
+import { fetchAssetSymbol } from "../../services/assetsServices";
 
 
 const ApiView = (props) => {
