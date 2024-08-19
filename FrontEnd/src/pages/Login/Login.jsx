@@ -8,6 +8,7 @@ export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const [error,setError] = useState(false);
 
 
     const handleLogin = async (e) => {
@@ -20,6 +21,7 @@ export const Login = () => {
             navigate('/portfolio');
         } catch (error) {
             console.error(error);
+            setError(error);
         }
     };
 
@@ -70,6 +72,11 @@ export const Login = () => {
                         </button>
                     </form>
                     <a href="/signup"><h6>Don't have a login? Please, register.</h6></a>
+                    { error ? (
+                        <p><h6 className="text-danger">Your email or password is incorrect</h6></p>
+                    ): (
+                        <p></p>
+                    )}
                     </div>
                 </div>
                 </div>
