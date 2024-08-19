@@ -1,9 +1,9 @@
-require('dotenv').config(); 
-const { sequelize } = require('./db/db'); 
-const User = require('./models/User'); 
-const Portfolio = require('./models/Portfolio'); 
-const Asset = require('./models/Asset'); 
-const PortfolioAsset = require('./models/PortfolioAssets'); 
+require('dotenv').config();
+const { sequelize } = require('./db/db');
+const User = require('./models/User');
+const Portfolio = require('./models/Portfolio');
+const Asset = require('./models/Asset');
+const PortfolioAsset = require('./models/PortfolioAssets');
 const { faker } = require('@faker-js/faker'); // Import Faker.js
 
 const seedDatabase = async () => {

@@ -10,6 +10,10 @@ const Asset = sequelize.define('Asset', {
     asset: {
         type: DataTypes.STRING(100),
         allowNull: false,
+    },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: true,
     }
 }, {
     tableName: 'assets',
