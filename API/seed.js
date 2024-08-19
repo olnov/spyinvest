@@ -1,9 +1,9 @@
-require('dotenv').config(); 
-const { sequelize } = require('./db/db'); 
-const User = require('./models/User'); 
-const Portfolio = require('./models/Portfolio'); 
-const Asset = require('./models/Asset'); 
-const PortfolioAsset = require('./models/PortfolioAssets'); 
+require('dotenv').config();
+const { sequelize } = require('./db/db');
+const User = require('./models/User');
+const Portfolio = require('./models/Portfolio');
+const Asset = require('./models/Asset');
+const PortfolioAsset = require('./models/PortfolioAssets');
 const { faker } = require('@faker-js/faker'); // Import Faker.js
 
 const seedDatabase = async () => {
@@ -32,13 +32,13 @@ const seedDatabase = async () => {
         });
 
         // Seed Assets
-        const assets = [];
-        for (let k = 0; k < 5; k++) {
-          const asset = await Asset.create({
-            asset: faker.finance.currencyName(),
-          });
-          assets.push(asset);
-        }
+        // const assets = [];
+        // for (let k = 0; k < 5; k++) {
+        //   const asset = await Asset.create({
+        //     asset: faker.finance.currencyName(),
+        //   });
+        //   assets.push(asset);
+        // }
 
         // Seed PortfolioAssets
         for (const asset of assets) {
