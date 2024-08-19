@@ -7,7 +7,7 @@ const fetchAssetsData = async () => {
 try {
     const request = await fetch("https://www.sec.gov/files/company_tickers.json");
     if (request){
-        console.log('I have received request.')
+        console.log(request)
     }
     const response = await request.json();
     console.log("Response:", response);
