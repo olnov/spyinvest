@@ -6,16 +6,20 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Landing from './pages/Landing'
 import WholeViewOfAssets from './pages/WholeViewOfAssets'
-
+import MyPortfolio from './pages/MyPortfolio';
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    children: [
-      {
-        path: "/",
-        element: <Landing />,
-      },]
+  path: "/",
+  children: [
+    {
+      path: "/",
+      element: <Landing />,
+    },]
+  },
+  {
+    path: "/portfolios",
+    element: <MyPortfolio />,
   }
 ])
 function App() {
