@@ -32,13 +32,13 @@ const seedDatabase = async () => {
         });
 
         // Seed Assets
-        // const assets = [];
-        // for (let k = 0; k < 5; k++) {
-        //   const asset = await Asset.create({
-        //     asset: faker.finance.currencyName(),
-        //   });
-        //   assets.push(asset);
-        // }
+        const assets = [];
+        for (let k = 0; k < 5; k++) {
+          const asset = await Asset.create({
+            asset: faker.finance.currencyName(),
+          });
+          assets.push(asset);
+        }
 
         // Seed PortfolioAssets
         for (const asset of assets) {
