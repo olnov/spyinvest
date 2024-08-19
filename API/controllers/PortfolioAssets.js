@@ -2,35 +2,28 @@ const PortfolioAsset = require('../models/PortfolioAssets');
 const Portfolio = require('../models/Portfolio');
 const Asset = require('../models/Asset');
 const User = require('../models/User'); 
+const datetimeformat = require('../helpers/datetimeformat');
 
 // Create new PortfolioAssets
 
 exports.createPortfolioAssets = async (req,res) => {
+    // currently issue with unique constraint on portfolio_id and asset_id
+    // I've added a helper function if there's an issue adding date to the database
     try {
-        const { 
-            portfolio_id,
-            asset_name,
-            //asset_id,//
-            date_purchase,
-            date_sell,
-            quantity_purchase,
-            quantiy_sell,
-            buying_price,
-            selling_price
-        } = req.body;
         const newPortfolioAssets = await PortfolioAsset.create({
-            portfolio_id, 
-            asset_id,
-            date_purchase,
-            date_sell,
-            quantity_purchase,
-            quantiy_sell,
-            buying_price,
-            selling_price,
+            portfolio_id : req.body.portfolio_id,
+            asset_id : req.asset_id,
+            date_purchase :(req.body.date_purchased),
+            date_sell : (req.body.date_sell),
+            quantity_purchase : req.body.quantity,
+            quantity_sell : req.body.quantity_sell,
+            price_buy : req.body.buying_price,
+            price_sell: req.body.selling_price,
             created_at: new Date(),
         });
         res.status(201).json({ message: "[PA-001] Created successfully:",newPortfolioAssets});
     }catch(error){
+        console.log(error);
         res.status(500).json({ message: "[PA-002] Can't create PortfolioAssets:", error:error.message});
     }
 }
@@ -53,7 +46,7 @@ exports.getAllPortfolioAssets = async (req, res) => {
         const portfolioAssetsWithDetails = portfolioAssets.map(portfolioAsset => ({
             portfolio_id: portfolioAsset.portfolio_id,
             asset_name: portfolioAsset.Asset.asset,
-            date_purchase: portfolioAsset.date_purchase,
+            date_purchase: (portfolioAsset.date_purchase),
             date_sell: portfolioAsset.date_sell,
             quantity_purchase: portfolioAsset.quantity_purchase,
             quantity_sell: portfolioAsset.quantity_sell,
@@ -69,7 +62,7 @@ exports.getAllPortfolioAssets = async (req, res) => {
 
 // Get PortfolioAsset by UserId
 exports.getPortfolioAssetsByUserId = async (req, res) => {
-    const userId = req.body.userId;
+    const userId = req.user_id;
     try {
         const user = await User.findOne({ where: { id: userId } });
         if (!user) {
@@ -95,7 +88,7 @@ exports.getPortfolioAssetsByUserId = async (req, res) => {
 
         const portfolioAssetsWithDetails = portfolioAssets.map(portfolioAsset => ({
             portfolio_id: portfolioAsset.portfolio_id,
-            asset_name: portfolioAsset.Asset.asset,
+            symbol: portfolioAsset.Asset.asset,
             asset_name: portfolioAsset.Asset.description,
             date_purchase: portfolioAsset.date_purchase,
             date_sell: portfolioAsset.date_sell,
@@ -134,7 +127,7 @@ exports.getPortfolioAssetsByPortfolioId = async (req, res) => {
             portfolio_id: portfolioAsset.portfolio_id,
             asset_name: portfolioAsset.Asset.asset,
             date_purchase: portfolioAsset.date_purchase,
-            date_sell: portfolioAsset.date_sell,
+            date_sell: portfolioAsset.date_sell || null,
             quantity_purchase: portfolioAsset.quantity_purchase,
             quantity_sell: portfolioAsset.quantity_sell,
             price_buy: portfolioAsset.price_buy,
