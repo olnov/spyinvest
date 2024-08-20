@@ -42,7 +42,7 @@ const PortfolioList = () => {
         <PortfolioCard
           key={portfolio.id}
           portfolioId={portfolio.id}
-          portfolioName={portfolio.name}
+          portfolioName={portfolio.title}
           portfolioDescription={portfolio.description}
 
           totalInvestment={calculatePortfolioValue(portfolio.id)}
