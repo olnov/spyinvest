@@ -9,6 +9,7 @@ import WholeViewOfAssets from './pages/WholeViewOfAssets'
 import MyPortfolio from './pages/MyPortfolio';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
   {

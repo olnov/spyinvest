@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getMyAssets } from '../../services/portfolioAssetServices';
 import { getPortfolios } from '../../services/PortfoliosServices';
 import PortfolioCard from './PortfolioCard';
+import Accordion from 'react-bootstrap/Accordion';
 
 // Portfolio List - displays all portfolios and their assets - This is the heart of the application
 
@@ -38,21 +39,28 @@ const PortfolioList = () => {
   return (
     <div>
       <h1>Portfolios</h1>
-      {portfolios.map((portfolio) => (
-        <PortfolioCard
-          key={portfolio.id}
-          portfolioId={portfolio.id}
-          portfolioName={portfolio.title}
-          portfolioDescription={portfolio.description}
+      <Accordion defaultActiveKey="0">
+      {portfolios.map((portfolio, index) => (
+        <Accordion.Item eventKey={index.toString()} key={portfolio.id}>
+          <Accordion.Header>{portfolio.title}</Accordion.Header>
+          <Accordion.Body>
+            <PortfolioCard
+              key={portfolio.id}
+              portfolioId={portfolio.id}
+              portfolioName={portfolio.title}
+              portfolioDescription={portfolio.description}
 
-          totalInvestment={calculatePortfolioValue(portfolio.id)}
-          // pAndL={/* calculate P&L here */}
-          // percPAndL={/* calculate % P&L here */}
-          // lastUpdated={/* format last updated date */}
-          portfolioAssets={portfolioAssets}
-          fetchPortfolioAssets={fetchPortfolioAssets}
+              totalInvestment={calculatePortfolioValue(portfolio.id)}
+              // pAndL={/* calculate P&L here */}
+              // percPAndL={/* calculate % P&L here */}
+              // lastUpdated={/* format last updated date */}
+              portfolioAssets={portfolioAssets}
+              fetchPortfolioAssets={fetchPortfolioAssets}
         />
+        </Accordion.Body>
+        </Accordion.Item>
       ))}
+      </Accordion>
     </div>
   );
 };
