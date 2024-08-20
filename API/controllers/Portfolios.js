@@ -4,7 +4,9 @@ const User = require('../models/User');
 // Create a new portfolio
 exports.createPortfolio = async (req,res) => {
     try {
-        const {title, description, user_id } = req.body;
+
+        const {title, description } = req.body;
+        const user_id = req.user_id;
         const newPortfolio = await Portfolio.create({
             title,
             description,
@@ -35,6 +37,7 @@ exports.getAllPortfolios = async (req, res) => {
 
         // Modify the response structure to include the user data
         const portfoliosWithUserDetails = allPortfolios.map(portfolio => ({
+            id: portfolio.id,
             title: portfolio.title,
             description: portfolio.description,
             user_id: portfolio.user_id,
@@ -52,8 +55,10 @@ exports.getAllPortfolios = async (req, res) => {
 // Get protfolio by user id
 
 exports.getPortfoliosByUserId = async (req,res) => {
-    try {
-        const { user_id } = req.params;
+
+    try { 
+        const user_id = req.user_id;
+        
         const { limit } = req.query;
         const portfolios = await Portfolio.findAll({ 
             where: {user_id:user_id},
@@ -64,6 +69,7 @@ exports.getPortfoliosByUserId = async (req,res) => {
             limit: limit,
         });
         const userPortfolios = portfolios.map(portfolio => ({
+            id: portfolio.id,
             title: portfolio.title,
             description: portfolio.description,
             user_id: portfolio.user_id,
@@ -71,6 +77,7 @@ exports.getPortfoliosByUserId = async (req,res) => {
             surname: portfolio.User.surname,
             created_at: portfolio.created_at,
         }));
+        console.log('User Portfolios: ', userPortfolios);
         res.status(200).json(userPortfolios);
     } catch(error) {
         res.status(500).json({ message: "[PORTFOLIOS-003] Can't execute the request:", error: error.message });
@@ -111,7 +118,8 @@ exports.getPortfolioById = async (req,res) => {
 exports.updatePortfolio = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description, user_id } = req.body;
+        const user_id = req.user_id;
+        const { title, description } = req.body;
         const portfolio = await Portfolio.findOne({
             where: { id },
         });

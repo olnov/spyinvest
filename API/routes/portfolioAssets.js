@@ -1,11 +1,11 @@
 const express = require('express');
-const { createPortfolioAssets, getAllPortfolioAssets, updatePortfolioAssetById, deletePortfolioAssetById, getPortfolioAssetsByPortfolioId } = require('../controllers/portfolioAssets');
+const { createPortfolioAssets, getPortfolioAssetsByUserId, updatePortfolioAssetById, deletePortfolioAssetById, getPortfolioAssetsByPortfolioId } = require('../controllers/PortfolioAssets');
 const router = express.Router();
 const assetChecker = require('../middleware/assetChecker');
 // Create new PortfolioAssets
 router.post('/',assetChecker, createPortfolioAssets);
 // Get all PortfolioAssets
-router.get('/',getAllPortfolioAssets);
+router.get('/',getPortfolioAssetsByUserId);
 
 // Get PortfolioAssets by portfolio id
 router.get('/:portfolio_id',getPortfolioAssetsByPortfolioId);
