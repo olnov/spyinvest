@@ -8,8 +8,9 @@ const User = require('../models/User');
 exports.createPortfolioAssets = async (req,res) => {
     try {
         const { 
-            portfolio_id, 
-            asset_id,
+            portfolio_id,
+            asset_name,
+            //asset_id,//
             date_purchase,
             date_sell,
             quantity_purchase,
@@ -46,10 +47,55 @@ exports.getAllPortfolioAssets = async (req, res) => {
                 {
                     model: Asset,
                     attributes: ['asset']
-                }
+                },
             ]
         });
-        res.status(200).json(portfolioAssets);
+        const portfolioAssetsWithDetails = portfolioAssets.map(portfolioAsset => ({
+            portfolio_id: portfolioAsset.portfolio_id,
+            asset_name: portfolioAsset.Asset.asset,
+            date_purchase: portfolioAsset.date_purchase,
+            date_sell: portfolioAsset.date_sell,
+            quantity_purchase: portfolioAsset.quantity_purchase,
+            quantity_sell: portfolioAsset.quantity_sell,
+            price_buy: portfolioAsset.price_buy,
+            price_sell: portfolioAsset.price_sell,
+        }));
+
+        res.status(200).json(portfolioAssetsWithDetails);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching portfolio assets", error: error.message });
+    }
+};
+
+// Get PortfolioAssets by PortfolioId
+exports.getPortfolioAssetsByPortfolioId = async (req, res) => {
+    try {
+        const { portfolio_id } = req.params;
+        const portfolioAssets = await PortfolioAsset.findAll({
+            where: { portfolio_id },
+            include: [
+                {
+                    model: Portfolio,
+                    attributes: ['title', 'description']
+                },
+                {
+                    model: Asset,
+                    attributes: ['asset']
+                },
+            ]
+        });
+        const portfolioAssetsWithDetails = portfolioAssets.map(portfolioAsset => ({
+            portfolio_id: portfolioAsset.portfolio_id,
+            asset_name: portfolioAsset.Asset.asset,
+            date_purchase: portfolioAsset.date_purchase,
+            date_sell: portfolioAsset.date_sell,
+            quantity_purchase: portfolioAsset.quantity_purchase,
+            quantity_sell: portfolioAsset.quantity_sell,
+            price_buy: portfolioAsset.price_buy,
+            price_sell: portfolioAsset.price_sell,
+        }));
+
+        res.status(200).json(portfolioAssetsWithDetails);
     } catch (error) {
         res.status(500).json({ message: "Error fetching portfolio assets", error: error.message });
     }
