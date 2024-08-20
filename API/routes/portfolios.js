@@ -1,5 +1,5 @@
 const express = require('express');
-const { createPortfolio, getAllPortfolios, getPortfoliosByUserId, getPortfolioById, updatePortfolio, deletePortfolio } = require('../controllers/Portfolios');
+const { createPortfolio, getAllPortfolios, getPortfoliosByUserId, getPortfolioById, updatePortfolio, deletePortfolio, getMyPortfolio } = require('../controllers/Portfolios');
 const router = express.Router();
 
 // Create new portfolio

@@ -1,5 +1,6 @@
 const Portfolio = require('../models/Portfolio');
 const User = require('../models/User'); 
+const PortfolioAssets = require('../models/PortfolioAssets');
 
 // Create a new portfolio
 exports.createPortfolio = async (req,res) => {
@@ -77,13 +78,39 @@ exports.getPortfoliosByUserId = async (req,res) => {
     }
 }
 
+// Get portfolio joined with portfolio_assets table.
+
+exports.getMyPortfolio = async (req,res) => {
+    try {
+        const { user_id } = req.params;
+        const { limit } = req.body;
+        const portfolio = await Portfolio.findAll({
+            where: {user_id:user_id},
+            include: [
+                {
+                    model:User,
+                    attributes:['name','surname'],
+                },
+                {
+                    model:PortfolioAssets,
+                    attributes:['asset_id','portfolio_id','date_purchase','date_sell','quantity_purchase','quaantity_sell','price_buy','price_sell','created_at']
+                }
+            ],
+            limit:limit,
+        })
+        res.status(200).json(portfolio);
+    }catch(error){
+        res.status(500).json({ message: "[PORTFOLIOS-010] Can't retrieve data", error:error.message});
+    }
+}
+
 // Get protfolio by id
 
 exports.getPortfolioById = async (req,res) => {
     try {
         const { id } = req.params;
         const portfolio = await Portfolio.findOne({ 
-            where: {id},
+            where: {id:id},
             include: [{
                 model: User,
                 attributes: ['name','surname'],

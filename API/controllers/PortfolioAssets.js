@@ -55,6 +55,35 @@ exports.getAllPortfolioAssets = async (req, res) => {
     }
 };
 
+// Get user's portfolios and assets
+exports.getUserPortfolioAssets = async (req,res) => {
+    const { user_id } = req.params;
+    const { limit } = req.body;
+    try {
+        const userPortfolioAssets = await PortfolioAsset.findAll({
+            where: {user_id:user_id},
+            include: [
+                {
+                    model: User,
+                    attributes: ['name','surname']
+                },
+                {
+                    model: Asset,
+                    attributes: ['asset', 'description']
+                },
+                {
+                    model: Portfolio,
+                    attributes: ['title']
+                }
+            ],
+            limit:limit,
+        })
+        res.status(200).json(userPortfolioAssets);
+    }catch(error){
+        res.status(500).json({ message: "Error fetching portfolio assets", error: error.message });
+    }
+}
+
 // Update PortfolioAssets
 exports.updatePortfolioAssetById = async (req, res) => {
     try {
