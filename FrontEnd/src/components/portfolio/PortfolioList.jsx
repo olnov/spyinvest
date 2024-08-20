@@ -4,6 +4,7 @@ import { getPortfolios } from '../../services/PortfoliosServices';
 import PortfolioCard from './PortfolioCard';
 import Accordion from 'react-bootstrap/Accordion';
 import AssetSummary from '../PortfolioAssets/AssetSummary';
+import './PortfolioList.scss';
 
 // Portfolio List - displays all portfolios and their assets - This is the heart of the application
 
@@ -40,7 +41,7 @@ const PortfolioList = () => {
   return (
     <div>
       <h1>Portfolios</h1>
-      <Accordion defaultActiveKey="0">
+      <Accordion>
       {portfolios.map((portfolio, index) => (
         <Accordion.Item eventKey={index.toString()} key={portfolio.id}>
           <Accordion.Header>

@@ -1,0 +1,47 @@
+$card-background-color: #ffffff;
+$card-border-color: #ddd;
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$text-color: #333;
+$modal-background-color: rgba(0, 0, 0, 0.5);
+
+// Container for the Portfolio Card
+.port-card {
+  background-color: $card-background-color;
+  border: none;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px auto;
+  text-align: center; // Center the text within the card
+  max-width: 400px; // Set a max width for the card to keep it centered
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  // Portfolio name styling
+  &__name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: $primary-color;
+    cursor: pointer;
+  }
+
+  // Description styling
+  &__description {
+    font-size: 1rem;
+    color: $secondary-color;
+    margin-bottom: 15px;
+  }
+
+  // Total investment styling
+  &__total-investment {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: $text-color;
+  }
+}
+
+.accordion-button::after {
+    display: none; // Hide the default arrow icon
+  }
