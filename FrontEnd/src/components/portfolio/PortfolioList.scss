@@ -4,18 +4,20 @@ $primary-color: #007bff;
 $secondary-color: #6c757d;
 $text-color: #333;
 $modal-background-color: rgba(0, 0, 0, 0.5);
+$accordion-button-focus-border-color: transparent;
+$accordion-button-focus-box-shadow: transparent;
 
 // Container for the Portfolio Card
 .port-card {
   background-color: $card-background-color;
-  border: none;
+  border: 1px solid $card-border-color;
   border-radius: 8px;
   padding: 20px;
   margin: 10px auto;
   text-align: center; // Center the text within the card
   max-width: 400px; // Set a max width for the card to keep it centered
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
+  position: relative; // Position the modal relative to the card
 
   // Portfolio name styling
   &__name {

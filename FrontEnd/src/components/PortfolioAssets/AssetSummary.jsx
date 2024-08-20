@@ -17,7 +17,7 @@ const AssetSummary = ({
     sellingPrice 
 }) => {
     return (
-        <div>
+        <div className="summary">
             <h1>{assetName}</h1>
             <h2>{assetSymbol}</h2>
             <ApiView assetSymbol={assetSymbol} />
