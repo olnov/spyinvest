@@ -7,6 +7,8 @@ import './App.css'
 import Landing from './pages/Landing'
 import WholeViewOfAssets from './pages/WholeViewOfAssets'
 import MyPortfolio from './pages/MyPortfolio';
+import Login from './pages/Login/Login';
+import SignUp from './pages/SignUp/SignUp';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
       path: "/",
       element: <Landing />,
     },]
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />,
   },
   {
     path: "/portfolios",
@@ -30,7 +40,6 @@ function App() {
     <>
 
       <RouterProvider router={router} />
-      <WholeViewOfAssets />
 
     </>
   )
