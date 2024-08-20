@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { getMyAssets } from '../../services/portfolioAssetServices';
 import { getPortfolios } from '../../services/PortfoliosServices';
 import PortfolioCard from './PortfolioCard';
 
+import Context from '../../context/Context';
+
 // Portfolio List - displays all portfolios and their assets - This is the heart of the application
 
 const PortfolioList = () => {
-  const [portfolioAssets, setPortfolioAssets] = useState([]);
+  const { PortfolioAssetsState, setPortfolioAssetsState } = useContext(Context);
   const [portfolios, setPortfolios] = useState([]);
 
   const fetchPortfolioAssets = async () => {
     const data = await getMyAssets(localStorage.getItem('token'));
-    setPortfolioAssets(data);
+    setPortfolioAssetsState(data);
   };
 
   const fetchPortfolios = async () => {
     const data = await getPortfolios(localStorage.getItem('token'));
-    setPortfolios(data)
     console.log('Fetch Portfolio data: ' + data);
+    setPortfolios(data)
+    
   };
 
   useEffect(() => {
@@ -25,15 +28,15 @@ const PortfolioList = () => {
     fetchPortfolios();
   }, []);
 
-  const calculatePortfolioValue = (portfolioId) => {
-    let totalValue = 0;
-    portfolioAssets.forEach((portfolioAsset) => {
-      if (portfolioAsset.portfolio_id === portfolioId) {
-        totalValue += portfolioAsset.quantity_purchase * portfolioAsset.price_buy;
-      }
-    });
-    return totalValue;
-  };
+  // const calculatePortfolioValue = (portfolioId) => {
+  //   let totalValue = 0;
+  //   PortfolioAssetsState.forEach((portfolioAsset) => {
+  //     if (portfolioAsset.portfolio_id === portfolioId) {
+  //       totalValue += portfolioAsset.quantity_purchase * portfolioAsset.price_buy;
+  //     }
+  //   });
+  //   return totalValue;
+  // };
 
   return (
     <div>
@@ -44,13 +47,12 @@ const PortfolioList = () => {
           portfolioId={portfolio.id}
           portfolioName={portfolio.title}
           portfolioDescription={portfolio.description}
-
-          totalInvestment={calculatePortfolioValue(portfolio.id)}
+          
+          // totalInvestment={calculatePortfolioValue(portfolio.id)}
           // pAndL={/* calculate P&L here */}
           // percPAndL={/* calculate % P&L here */}
           // lastUpdated={/* format last updated date */}
-          portfolioAssets={portfolioAssets}
-          fetchPortfolioAssets={fetchPortfolioAssets}
+         
         />
       ))}
     </div>

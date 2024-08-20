@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Context from './context/Context';
 import './App.css'
 import Landing from './pages/Landing'
-import WholeViewOfAssets from './pages/WholeViewOfAssets'
+
+import { getMyAssets } from './services/portfolioAssetServices';
+
 import MyPortfolio from './pages/MyPortfolio';
+import { useState, useEffect } from 'react';
 
 const router = createBrowserRouter([
   {
@@ -23,14 +24,16 @@ const router = createBrowserRouter([
   }
 ])
 function App() {
+  const [PortfolioAssetsState, setPortfolioAssetsState] = useState([]);
 
+  
 
   return (
 
     <>
-
+      <Context.Provider value={{ PortfolioAssetsState, setPortfolioAssetsState }}>
       <RouterProvider router={router} />
-
+      </Context.Provider>
 
     </>
   )

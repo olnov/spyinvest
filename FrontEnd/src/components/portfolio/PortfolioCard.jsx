@@ -1,19 +1,28 @@
 import React from 'react';
 import AssetSummary from '../PortfolioAssets/AssetSummary';
 import AddAsset from '../PortfolioAssets/AddAsset';
+import Context from '../../context/Context';
+import { useContext } from 'react';
+import { biggestWinner, biggestLoser } from '../../utils/PortfolioCalucations';
 
-const PortfolioCard = ({
-  portfolioName,
-  portfolioDescription,
-  totalInvestment,
-  pAndL,
-  percPAndL,
-  lastUpdated,
+const PortfolioCard = async ({
   portfolioId,
-  portfolioAssets,
-  fetchPortfolioAssets,
+  portfolioName,
+  portfolioDescription
+
 }) => {
   const modalId = `portfolioModal-${portfolioId}`;
+
+  const { PortfolioAssetsState, setPortfolioAssetsState } = useContext(Context);
+
+
+  console.log(PortfolioAssetsState)
+  const portfolioArray = PortfolioAssetsState.filter((portfolioAsset) => portfolioAsset.portfolio_id === portfolioId);
+  console.log('Port id', portfolioId)
+
+  console.log('Fetched response: ' + data);
+  console.log('expecting this to be a 1 array with 1object per index', portfolioArray)
+  console.log('If above is empty, this must be too : ', PortfolioAssetsState)
 
   return (
     <div className="port-card">
@@ -26,10 +35,11 @@ const PortfolioCard = ({
         {portfolioName}
       </div>
       <div className="port-card__description">{portfolioDescription}</div>
-      <div className="port-card__total-investment">${totalInvestment}</div>
-      <div className="port-card__p-and-l">{pAndL}</div>
-      <div className="port-card__perc-p-and-l">{percPAndL}</div>
-      <div className="port-card__last-updated">{lastUpdated}</div>
+      <div className="port-card__total-investment">${}</div>
+      <div className="port-card__biggest-winner"> {biggestWinner(PortfolioAssetsState, portfolioId)} </div>
+      <div className="port-card__p-and-l">{}</div>
+      <div className="port-card__perc-p-and-l">{}</div>
+      <div className="port-card__last-updated">{}</div>
 
       {/* Portfolio Modal */}
       <div
@@ -54,23 +64,23 @@ const PortfolioCard = ({
               ></button>
             </div>
             <div className="modal-body">
-              {portfolioAssets.map((portfolioAsset) => {
-                if (portfolioAsset.portfolio_id === portfolioId) {
+              {portfolioArray.map((portfolioAsset) => { 
                   return (
                     <AssetSummary
                       key={portfolioAsset.id}
                       assetName={portfolioAsset.asset_name}
                       assetSymbol={portfolioAsset.symbol}
-                      datePurchased={portfolioAsset.date_purchased}
+                      datePurchased={portfolioAsset.date_purchase}
                       dateSell={portfolioAsset.date_sell}
                       quantity={portfolioAsset.quantity_purchase}
+                      qtysell= {portfolioAsset.quantity_sell}
                       buyingPrice={portfolioAsset.price_buy}
                       sellingPrice={portfolioAsset.price_sell}
                     />
-                  );
+                  )
                 }
-                return null;
-              })}
+              )}
+
 
               {/* Add Asset Button */}
               <button
@@ -99,7 +109,7 @@ const PortfolioCard = ({
       <AddAsset
         portfolioId={portfolioId}
         portfolioName={portfolioName}
-        onSubmit={fetchPortfolioAssets}
+      
       />
     </div>
   );
