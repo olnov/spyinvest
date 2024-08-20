@@ -2,6 +2,7 @@ import PortfolioList from "../components/portfolio/PortfolioList";
 import { useState } from "react";
 import CreatePortfolioForm from "../components/input/CreatePortfolioForm";
 import { createPortfolio } from "../services/PortfoliosServices";
+import { TopBar } from "../components/TopBar/TopBar";
 
 // My portfolio  -> portfolio list  | create portfolio
 
@@ -26,6 +27,7 @@ const MyPortfolio = () => {
 
   return (
     <>
+      <TopBar />
       <h1>My Portfolio</h1>
       <PortfolioList />
       <button data-bs-toggle="modal" data-bs-target="#create-portfolio-modal">

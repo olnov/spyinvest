@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3001/"
+      "url": "http://localhost:3000/"
     }
   ],
   "paths": {
@@ -51,7 +51,7 @@
         }
       }
     },
-    "/users/": {
+    "/auth/register/": {
       "post": {
         "description": "",
         "responses": {
@@ -94,7 +94,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/users/": {
       "get": {
         "description": "",
         "responses": {
