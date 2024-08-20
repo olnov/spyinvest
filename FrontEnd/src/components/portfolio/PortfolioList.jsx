@@ -3,6 +3,7 @@ import { getMyAssets } from '../../services/portfolioAssetServices';
 import { getPortfolios } from '../../services/PortfoliosServices';
 import PortfolioCard from './PortfolioCard';
 import Accordion from 'react-bootstrap/Accordion';
+import AssetSummary from '../PortfolioAssets/AssetSummary';
 
 // Portfolio List - displays all portfolios and their assets - This is the heart of the application
 
@@ -42,9 +43,8 @@ const PortfolioList = () => {
       <Accordion defaultActiveKey="0">
       {portfolios.map((portfolio, index) => (
         <Accordion.Item eventKey={index.toString()} key={portfolio.id}>
-          <Accordion.Header>{portfolio.title}</Accordion.Header>
-          <Accordion.Body>
-            <PortfolioCard
+          <Accordion.Header>
+          <PortfolioCard
               key={portfolio.id}
               portfolioId={portfolio.id}
               portfolioName={portfolio.title}
@@ -57,8 +57,26 @@ const PortfolioList = () => {
               portfolioAssets={portfolioAssets}
               fetchPortfolioAssets={fetchPortfolioAssets}
         />
-        </Accordion.Body>
-        </Accordion.Item>
+          </Accordion.Header>
+          <Accordion.Body>
+            {portfolioAssets.map((portfolioAsset) => {
+              if (portfolioAsset.portfolio_id === portfolio.id) {
+                return (
+                  <AssetSummary
+                    key={portfolioAsset.id}
+                    assetName={portfolioAsset.asset_name}
+                    assetSymbol={portfolioAsset.symbol}
+                    datePurchased={portfolioAsset.date_purchased}
+                    dateSell={portfolioAsset.date_sell}
+                    quantity={portfolioAsset.quantity_purchase}
+                    buyingPrice={portfolioAsset.price_buy}
+                    sellingPrice={portfolioAsset.price_sell}
+                  />
+                );
+              }
+            })}
+          </Accordion.Body>
+          </Accordion.Item>
       ))}
       </Accordion>
     </div>
