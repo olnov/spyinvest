@@ -17,6 +17,7 @@ const usersRouter = require('./routes/users');
 const assetsRouter = require('./routes/assets');
 const portfoliosRouter = require('./routes/portfolios');
 const portfolioAssetsRouter = require('./routes/portfolioAssets');
+const tokenChecker = require('./middleware/tokenChecker');
 
 
 var app = express();
@@ -39,10 +40,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
-app.use('/users', usersRouter);
-app.use('/assets',assetsRouter);
-app.use('/portfolios',portfoliosRouter);
-app.use('/portfolio_assets',portfolioAssetsRouter);
+app.use('/users', tokenChecker, usersRouter);
+app.use('/assets', tokenChecker,  assetsRouter);
+app.use('/portfolios',tokenChecker,  portfoliosRouter);
+app.use('/portfolio_assets', tokenChecker, portfolioAssetsRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // catch 404 and forward to error handler

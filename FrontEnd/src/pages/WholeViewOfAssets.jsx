@@ -1,5 +1,5 @@
 import React from 'react'
-import ApiView from '../components/ApiView'
+import ApiView from '../components/PortfolioAssets/ApiView'
 
 const wholeView = () => {
   return (
