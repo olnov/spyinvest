@@ -127,7 +127,7 @@ exports.getPortfolioAssetsByPortfolioId = async (req, res) => {
             portfolio_id: portfolioAsset.portfolio_id,
             asset_name: portfolioAsset.Asset.asset,
             date_purchase: portfolioAsset.date_purchase,
-            date_sell: portfolioAsset.date_sell || null,
+            date_sell: portfolioAsset.date_sell,
             quantity_purchase: portfolioAsset.quantity_purchase,
             quantity_sell: portfolioAsset.quantity_sell,
             price_buy: portfolioAsset.price_buy,
