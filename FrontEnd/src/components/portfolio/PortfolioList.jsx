@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getMyAssets } from '../../services/portfolioAssetServices';
+import { fetchAssetsandCurrentPrices } from '../../services/assetsServices';
 import { getPortfolios } from '../../services/PortfoliosServices';
 import PortfolioCard from './PortfolioCard';
 
@@ -8,10 +9,17 @@ import PortfolioCard from './PortfolioCard';
 const PortfolioList = () => {
   const [portfolioAssets, setPortfolioAssets] = useState([]);
   const [portfolios, setPortfolios] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchPortfolioAssets = async () => {
-    const data = await getMyAssets(localStorage.getItem('token'));
-    setPortfolioAssets(data);
+    try {
+      const data = await fetchAssetsandCurrentPrices(localStorage.getItem('token'));
+      setPortfolioAssetsState(data);
+      console.log('Fetch Portfolio Assets data:', data);
+      console.log('Portfolio Assets State:', portfolioAssetsState);
+    } catch (error) {
+      console.error('Error fetching portfolio assets:', error);
+    }
   };
 
   const fetchPortfolios = async () => {
