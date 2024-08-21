@@ -14,7 +14,9 @@ export const fetchPrices = async (symbol, timeframe = "8H") => {
         },
     };
     const response = await fetch(`https://data.alpaca.markets/v2/stocks/bars?symbols=${symbol}&timeframe=${timeframe}`, requestOptions)
+    console.log('response', response)
     const data = await response.json()
+    
 
     return data
 }

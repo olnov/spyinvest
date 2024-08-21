@@ -13,6 +13,7 @@ const PortfolioList = () => {
 
   const fetchPortfolioAssets = async () => {
     const data = await getMyAssets(localStorage.getItem('token'));
+
     setPortfolioAssetsState(data);
   };
 
@@ -47,6 +48,7 @@ const PortfolioList = () => {
           portfolioId={portfolio.id}
           portfolioName={portfolio.title}
           portfolioDescription={portfolio.description}
+          portfolioAssets={PortfolioAssetsState.filter((asset) => asset.portfolio_id === portfolio.id)}
           
           // totalInvestment={calculatePortfolioValue(portfolio.id)}
           // pAndL={/* calculate P&L here */}

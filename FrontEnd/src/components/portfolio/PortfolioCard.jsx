@@ -8,21 +8,11 @@ import { biggestWinner, biggestLoser } from '../../utils/PortfolioCalucations';
 const PortfolioCard = async ({
   portfolioId,
   portfolioName,
-  portfolioDescription
+  portfolioDescription,
+  portfolioAssets,
 
 }) => {
   const modalId = `portfolioModal-${portfolioId}`;
-
-  const { PortfolioAssetsState, setPortfolioAssetsState } = useContext(Context);
-
-
-  console.log(PortfolioAssetsState)
-  const portfolioArray = PortfolioAssetsState.filter((portfolioAsset) => portfolioAsset.portfolio_id === portfolioId);
-  console.log('Port id', portfolioId)
-
-  console.log('Fetched response: ' + data);
-  console.log('expecting this to be a 1 array with 1object per index', portfolioArray)
-  console.log('If above is empty, this must be too : ', PortfolioAssetsState)
 
   return (
     <div className="port-card">
@@ -36,7 +26,7 @@ const PortfolioCard = async ({
       </div>
       <div className="port-card__description">{portfolioDescription}</div>
       <div className="port-card__total-investment">${}</div>
-      <div className="port-card__biggest-winner"> {biggestWinner(PortfolioAssetsState, portfolioId)} </div>
+      <div className="port-card__biggest-winner"> {biggestWinner(portfolioAssets, portfolioId)} </div>
       <div className="port-card__p-and-l">{}</div>
       <div className="port-card__perc-p-and-l">{}</div>
       <div className="port-card__last-updated">{}</div>
@@ -64,7 +54,7 @@ const PortfolioCard = async ({
               ></button>
             </div>
             <div className="modal-body">
-              {portfolioArray.map((portfolioAsset) => { 
+              {portfolioAssets.map((portfolioAsset) => { 
                   return (
                     <AssetSummary
                       key={portfolioAsset.id}

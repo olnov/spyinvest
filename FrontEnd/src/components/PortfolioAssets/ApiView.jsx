@@ -5,14 +5,17 @@ const ApiView = ({ assetSymbol }) => {
     // const [symbolTicker, setSymbolTicker] = useState("");
     // const [symbolName, setSymbolName] = useState("");
     const [symbolPrice, setSymbolPrice] = useState(0);
+    console.log('Received this symbol: ', assetSymbol);
 
     useEffect(() => {
         const fetchAssetPrice = async () => {
             try {
                 const result = await fetchPrices(assetSymbol, "8H");
+                console.log('result',result);
 
                 if (result && result['bars'] && result['bars'][assetSymbol]) {
                     setSymbolPrice(result['bars'][assetSymbol][0].c);
+
                 }
             } catch (err) {
                 console.error("Error fetching price:", err);
