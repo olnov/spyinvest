@@ -25,7 +25,7 @@ const User = sequelize.define('User', {
         allowNull: false,
     },
     photo: {
-        type: DataTypes.BLOB,
+        type: DataTypes.TEXT,
     },
     gender: {
         type: DataTypes.STRING(1),
