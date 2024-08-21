@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export const TopBar = ()=>{
     const token = localStorage.getItem('token');
+    const id = localStorage.getItem('userId');
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -35,13 +36,13 @@ export const TopBar = ()=>{
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                    <a className="nav-link fs-5 link-underline-opacity-100-hover" aria-current="page" href="/portfolio">Portfolio</a>
+                    <a className="nav-link fs-5 link-underline-opacity-100-hover" aria-current="page" href="/portfolios">Portfolio</a>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link fs-5" aria-current="page" href="/dashboard">My dashboard</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link fs-5" aria-current="page" href="/profile">Profile settings</a>
+                    <a className="nav-link fs-5" aria-current="page" href={'/profile/' + id}>Profile settings</a>
                 </li>
             </ul>
         </div>
