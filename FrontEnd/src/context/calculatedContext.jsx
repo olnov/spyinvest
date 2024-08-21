@@ -3,6 +3,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 
 
-const Context = createContext();
+const CalculatedContext = createContext();
 
-export default Context;
+export default CalculatedContext;     

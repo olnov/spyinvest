@@ -1,18 +1,28 @@
-import React from 'react';
+import React , {useContext} from 'react';
 import AssetSummary from '../PortfolioAssets/AssetSummary';
 import AddAsset from '../PortfolioAssets/AddAsset';
+// import { biggestWinner, biggestLoser } from '../../utils/PortfolioCalucations';
 import Context from '../../context/Context';
-import { useContext } from 'react';
-import { biggestWinner, biggestLoser } from '../../utils/PortfolioCalucations';
+import CalculatedContext from '../../context/calculatedContext';
 
-const PortfolioCard = async ({
+const PortfolioCard = ({
   portfolioId,
   portfolioName,
   portfolioDescription,
-  portfolioAssets,
-
 }) => {
   const modalId = `portfolioModal-${portfolioId}`;
+
+  const { portfolioAssetsState } = useContext(Context);
+  console.log(  'Portfolio Assets State:', portfolioAssetsState);
+  const { calculatedAssets } = useContext(CalculatedContext);
+
+  const portfolioAssets = portfolioAssetsState.filter( (portfolioAsset) => portfolioAsset.portfolio_id === portfolioId);
+  console.log('filtered Portfolio Assets:', portfolioAssets);
+  const calculatedPortfolioAssets = calculatedAssets.filter( (calculatedAsset) => portfolioAssets.map( (portfolioAsset) => portfolioAsset.port_asset_id).includes(calculatedAsset.portAssetId));
+  console.log('calculated Portfolio Assets:', calculatedPortfolioAssets);
+  console.log('Portfolio Assets:', portfolioAssets);
+  // const bigWin = biggestWinner(portfolioAssets);
+
 
   return (
     <div className="port-card">
@@ -25,11 +35,11 @@ const PortfolioCard = async ({
         {portfolioName}
       </div>
       <div className="port-card__description">{portfolioDescription}</div>
-      <div className="port-card__total-investment">${}</div>
-      <div className="port-card__biggest-winner"> {biggestWinner(portfolioAssets, portfolioId)} </div>
-      <div className="port-card__p-and-l">{}</div>
-      <div className="port-card__perc-p-and-l">{}</div>
-      <div className="port-card__last-updated">{}</div>
+      <div className="port-card__total-investment">$Here: {calculatedAssets.currentValue}</div>
+      {/* <div className="port-card__biggest-winner"> {bigWin} </div> */}
+      <div className="port-card__p-and-l">{/* P&L logic here */}</div>
+      <div className="port-card__perc-p-and-l">{/* % P&L logic here */}</div>
+      <div className="port-card__last-updated">{/* last updated date */}</div>
 
       {/* Portfolio Modal */}
       <div
@@ -54,25 +64,20 @@ const PortfolioCard = async ({
               ></button>
             </div>
             <div className="modal-body">
-              {portfolioAssets.map((portfolioAsset) => { 
-                  return (
-                    <AssetSummary
-                      key={portfolioAsset.id}
-                      assetName={portfolioAsset.asset_name}
-                      assetSymbol={portfolioAsset.symbol}
-                      datePurchased={portfolioAsset.date_purchase}
-                      dateSell={portfolioAsset.date_sell}
-                      quantity={portfolioAsset.quantity_purchase}
-                      qtysell= {portfolioAsset.quantity_sell}
-                      buyingPrice={portfolioAsset.price_buy}
-                      sellingPrice={portfolioAsset.price_sell}
-                    />
-                  )
-                }
-              )}
-
-
-              {/* Add Asset Button */}
+              {portfolioAssets.map((portfolioAsset) => (
+                <AssetSummary
+                  key={portfolioAsset.id}
+                  assetName={portfolioAsset.asset_name}
+                  assetSymbol={portfolioAsset.symbol}
+                  datePurchased={portfolioAsset.date_purchase}
+                  dateSell={portfolioAsset.date_sell}
+                  quantity={portfolioAsset.quantity_purchase}
+                  qtysell={portfolioAsset.quantity_sell}
+                  buyingPrice={portfolioAsset.price_buy}
+                  sellingPrice={portfolioAsset.price_sell}
+                  portAssetId={portfolioAsset.port_asset_id}
+                />
+              ))}
               <button
                 className="btn btn-primary mt-3"
                 data-bs-toggle="modal"
@@ -99,7 +104,7 @@ const PortfolioCard = async ({
       <AddAsset
         portfolioId={portfolioId}
         portfolioName={portfolioName}
-      
+        onSubmit={() => {/* refresh logic if needed */}}
       />
     </div>
   );

@@ -5,23 +5,31 @@ import PortfolioCard from './PortfolioCard';
 
 import Context from '../../context/Context';
 
-// Portfolio List - displays all portfolios and their assets - This is the heart of the application
-
 const PortfolioList = () => {
-  const { PortfolioAssetsState, setPortfolioAssetsState } = useContext(Context);
+  const { portfolioAssetsState, setPortfolioAssetsState } = useContext(Context);
   const [portfolios, setPortfolios] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchPortfolioAssets = async () => {
-    const data = await getMyAssets(localStorage.getItem('token'));
-
-    setPortfolioAssetsState(data);
+    try {
+      const data = await getMyAssets(localStorage.getItem('token'));
+      setPortfolioAssetsState(data);
+      console.log('Fetch Portfolio Assets data:', data);
+    } catch (error) {
+      console.error('Error fetching portfolio assets:', error);
+    }
   };
 
   const fetchPortfolios = async () => {
-    const data = await getPortfolios(localStorage.getItem('token'));
-    console.log('Fetch Portfolio data: ' + data);
-    setPortfolios(data)
-    
+    try {
+      const data = await getPortfolios(localStorage.getItem('token'));
+      
+      setPortfolios(data);
+    } catch (error) {
+      console.error('Error fetching portfolios:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -29,15 +37,15 @@ const PortfolioList = () => {
     fetchPortfolios();
   }, []);
 
-  // const calculatePortfolioValue = (portfolioId) => {
-  //   let totalValue = 0;
-  //   PortfolioAssetsState.forEach((portfolioAsset) => {
-  //     if (portfolioAsset.portfolio_id === portfolioId) {
-  //       totalValue += portfolioAsset.quantity_purchase * portfolioAsset.price_buy;
-  //     }
-  //   });
-  //   return totalValue;
-  // };
+
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!portfolios.length) {
+    return <div>No portfolios available.</div>;
+  }
 
   return (
     <div>
@@ -48,13 +56,9 @@ const PortfolioList = () => {
           portfolioId={portfolio.id}
           portfolioName={portfolio.title}
           portfolioDescription={portfolio.description}
-          portfolioAssets={PortfolioAssetsState.filter((asset) => asset.portfolio_id === portfolio.id)}
-          
-          // totalInvestment={calculatePortfolioValue(portfolio.id)}
           // pAndL={/* calculate P&L here */}
           // percPAndL={/* calculate % P&L here */}
-          // lastUpdated={/* format last updated date */}
-         
+          // lastUpdated={formatLastUpdated(portfolio.lastUpdated)}
         />
       ))}
     </div>

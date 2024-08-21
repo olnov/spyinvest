@@ -10,19 +10,25 @@ const formatDate = (date) => {
 const AssetSummary = ({ 
     assetName, 
     assetSymbol, 
-    date_purchase, 
+    datePurchased, 
     dateSell, 
-    quantity, 
+    quantity,
+    qtysell,
     buyingPrice, 
-    sellingPrice 
+    sellingPrice,
+    portAssetId
 }) => {
+    console.log('AssetSummary:', assetName, assetSymbol, datePurchased, dateSell, quantity, buyingPrice, sellingPrice, portAssetId);
     return (
         <div>
             <h1>{assetName}</h1>
             <h2>{assetSymbol}</h2>
-            <ApiView assetSymbol={assetSymbol} />
+            <ApiView assetSymbol={assetSymbol}
+            buyingPrice={buyingPrice}
+            quantity={quantity}
+            portAssetId={portAssetId} />
             
-            <h3>Purchase Date: {formatDate(date_purchase)}</h3>
+            <h3>Purchase Date: {formatDate(datePurchased)}</h3>
             <h5>Quantity Bought: {quantity}</h5>
             <h6>Buy Price: ${buyingPrice.toFixed(2)}</h6>
             {sellingPrice && <h5>Sell Price: ${sellingPrice.toFixed(2)}</h5>}

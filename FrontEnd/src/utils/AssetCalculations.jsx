@@ -11,7 +11,11 @@ export const deltaPrice = (buyPrice, currentPrice) => {
 }
 
 export const deltaPercentage = (buyPrice, currentPrice) => {
+    if (buyPrice === 0) {
+        return 100;
+    } else {
     return deltaPrice(buyPrice, currentPrice) / buyPrice * 100;
+    }
 }
 
 export const deltaWeightedPrice = (buyPrice, currentPrice, quantity) => {

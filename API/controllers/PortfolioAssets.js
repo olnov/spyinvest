@@ -45,6 +45,7 @@ exports.getAllPortfolioAssets = async (req, res) => {
         });
         const portfolioAssetsWithDetails = portfolioAssets.map(portfolioAsset => ({
             portfolio_id: portfolioAsset.portfolio_id,
+            port_asset_id: portfolioAsset.id,
             asset_name: portfolioAsset.Asset.asset,
             date_purchase: (portfolioAsset.date_purchase),
             date_sell: portfolioAsset.date_sell,
@@ -89,6 +90,7 @@ exports.getPortfolioAssetsByUserId = async (req, res) => {
         const portfolioAssetsWithDetails = portfolioAssets.map(portfolioAsset => ({
             portfolio_id: portfolioAsset.portfolio_id,
             symbol: portfolioAsset.Asset.asset,
+            port_asset_id: portfolioAsset.id,
             asset_name: portfolioAsset.Asset.description,
             date_purchase: portfolioAsset.date_purchase,
             date_sell: portfolioAsset.date_sell,

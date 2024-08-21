@@ -1,13 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Context from './context/Context';
+
 import './App.css'
 import Landing from './pages/Landing'
-
-import { getMyAssets } from './services/portfolioAssetServices';
-
 import MyPortfolio from './pages/MyPortfolio';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import CalculatedContext from './context/calculatedContext';
 
 const router = createBrowserRouter([
   {
@@ -24,16 +23,25 @@ const router = createBrowserRouter([
   }
 ])
 function App() {
-  const [PortfolioAssetsState, setPortfolioAssetsState] = useState([]);
+  const [portfolioAssetsState, setPortfolioAssetsState] = useState([]);
+  const [calculatedAssets, setCalculatedAssets] = useState([[]]);
 
   
 
   return (
 
     <>
-      <Context.Provider value={{ PortfolioAssetsState, setPortfolioAssetsState }}>
+    <Context.Provider value={{ portfolioAssetsState, setPortfolioAssetsState}}>
+      <CalculatedContext.Provider value={{ calculatedAssets, setCalculatedAssets}}>
+    <RouterProvider router={router} />
+    </CalculatedContext.Provider>
+      </Context.Provider> 
+
+      {/* <Context.Provider value={{ value:[portfolioAssetsState, setPortfolioAssetsState],
+        value2: [calculatedAssets, setCalulclatedAssets]
+      }}>
       <RouterProvider router={router} />
-      </Context.Provider>
+      </Context.Provider> */}
 
     </>
   )
