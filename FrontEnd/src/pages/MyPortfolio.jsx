@@ -29,7 +29,9 @@ const MyPortfolio = () => {
     <>
       <TopBar />
       <h1>My Portfolio</h1>
-      <PortfolioList />
+      <div className="portfolio-list">
+        <PortfolioList />
+      </div>
       <button data-bs-toggle="modal" data-bs-target="#create-portfolio-modal">
         Create Portfolio
       </button>
