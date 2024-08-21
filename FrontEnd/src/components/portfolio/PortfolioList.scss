@@ -1,22 +1,20 @@
-$card-background-color: #ffffff;
-$card-border-color: #ddd;
+$card-background-color: #ffffff00;
+$card-border-color: #dddddd00;
 $primary-color: #007bff;
 $secondary-color: #6c757d;
 $text-color: #333;
-$modal-background-color: rgba(0, 0, 0, 0.5);
-$accordion-button-focus-border-color: transparent;
-$accordion-button-focus-box-shadow: transparent;
+$modal-background-color: rgba(0, 0, 0, 0);
 
 // Container for the Portfolio Card
 .port-card {
   background-color: $card-background-color;
   border: 1px solid $card-border-color;
   border-radius: 8px;
-  padding: 20px;
+  padding: 10px;
   margin: 10px auto;
   text-align: center; // Center the text within the card
   max-width: 400px; // Set a max width for the card to keep it centered
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative; // Position the modal relative to the card
 
   // Portfolio name styling
@@ -30,14 +28,14 @@ $accordion-button-focus-box-shadow: transparent;
 
   // Description styling
   &__description {
-    font-size: 1rem;
+    font-size: 0.5rem;
     color: $secondary-color;
     margin-bottom: 15px;
   }
 
   // Total investment styling
   &__total-investment {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: bold;
     margin-bottom: 10px;
     color: $text-color;
@@ -46,4 +44,56 @@ $accordion-button-focus-box-shadow: transparent;
 
 .accordion-button::after {
     display: none; // Hide the default arrow icon
+    background-color: red;
   }
+
+.accordion-button.collapsed {
+  display: table;
+}
+
+.accordion-button {
+  background-color: transparent !important; // Force remove background color
+  border: none !important; // Force remove border
+  box-shadow: none !important; // Force remove box-shadow
+
+  &:not(.collapsed) {
+    background-color: transparent !important;
+    border: none !important;
+  }
+
+  &:hover {
+    background-color: transparent !important;
+    border: none !important;
+  }
+
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+.summary {
+  background-color: #f9f9f9; // Light background color for the box
+  border: 1px solid #ddd; // Light border for the box
+  border-radius: 8px; // Rounded corners
+  padding: 15px; // Padding inside the box
+  margin-bottom: 20px; // Space between each box
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow for a lifted effect
+  max-width: 400px; // Control width of the box
+  margin: 10px auto; // Center the box within its container
+  
+      h1 {
+        font-size: 0.7rem; // Slightly smaller text on smaller screens
+      }
+  
+      h2 {
+        font-size: 1.5rem; // Adjust size of the symbol
+      }
+  
+      h3, h4, h5, h6 {
+        font-size: 0.5rem; // Adjust size of other text elements
+      }
+  
+      h4, h5, h6 {
+        font-size: 1rem; // Make smaller text even smaller
+      }
+    }

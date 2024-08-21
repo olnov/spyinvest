@@ -1,5 +1,6 @@
 import React from "react";
 import ApiView from "./ApiView";
+import "../portfolio/PortfolioList.scss";
 
 const formatDate = (date) => {
     if (!date) return "N/A";
