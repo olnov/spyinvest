@@ -53,10 +53,16 @@ const PortfolioAsset = sequelize.define('PortfolioAsset', {
 }, {
     tableName: 'portfolio_assets',
     timestamps: false,
+    indexes: [
+        {
+            fields: ['portfolio_id', 'asset_id'],
+            unique: false, // Ensure there is no unique constraint on these fields
+        },
+    ],
 });
 
-Portfolio.belongsToMany(Asset, { through: PortfolioAsset, foreignKey: 'portfolio_id' });
-Asset.belongsToMany(Portfolio, { through: PortfolioAsset, foreignKey: 'asset_id' });
+Portfolio.belongsToMany(Asset, { through: PortfolioAsset, foreignKey: 'portfolio_id', unique: false });
+Asset.belongsToMany(Portfolio, { through: PortfolioAsset, foreignKey: 'asset_id', unique: false });
 
 PortfolioAsset.belongsTo(Portfolio, { foreignKey: 'portfolio_id' });
 PortfolioAsset.belongsTo(Asset, { foreignKey: 'asset_id' });

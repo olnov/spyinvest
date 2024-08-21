@@ -32,10 +32,23 @@ const User = sequelize.define('User', {
     },
     birth_date: {
         type: DataTypes.DATE,
+        get() {
+            const rawDate = this.getDataValue('birth_date');
+            return rawDate ? rawDate.toISOString().split('T')[0] : null;
+          },
     },
     registred_at: {
         type: DataTypes.DATE,
         allowNull: false,
+        get() {
+            const rawDate = this.getDataValue('registred_at');
+            return rawDate ? rawDate.toISOString().split('T')[0] : null;
+          },
+    },
+    terms_accepted: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
     }
 }, {
     tableName: 'users',

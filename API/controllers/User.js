@@ -53,16 +53,18 @@ exports.getUserById = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, surname, email, password, gender, birth_date } = req.body;
+    const { name, surname, email, password, gender, birth_date, terms } = req.body;
     const user = await User.findByPk(id);
     if (!user) {
       return res.status(404).json({ message: '[USERS-007] User not found' });
     }
      // Making sure the email is unique
-    const exisingEmail = await User.findOne({ where: {email: email }});
-    if (exisingEmail) {
-        res.status(409).json({ message: '[USERS-012] Email already exists', exisingEmail });
-    };
+     if (email) {
+        const exisingEmail = await User.findOne({ where: {email: email }});
+        if (exisingEmail) {
+          return res.status(409).json({ message: '[USERS-012] Email already exists', exisingEmail });
+        };
+     }
     await user.update({
       name: name || user.name,
       surname: surname || user.surname,
@@ -70,10 +72,12 @@ exports.updateUser = async (req, res) => {
       password: password || user.password, 
       gender: gender || user.gender,
       birth_date:birth_date || user.birth_date,
+      terms_accepted: terms || user.terms,
     });
     res.status(200).json({ message: '[USERS-008] User updated successfully', user });
   } catch (error) {
     res.status(500).json({ message: '[USERS-009] Error updating user', error: error.message });
+    console.log(error);
   }
 };
 
