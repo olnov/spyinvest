@@ -10,12 +10,12 @@ import CalculatedContext from './context/calculatedContext';
 
 const router = createBrowserRouter([
   {
-  path: "/",
-  children: [
-    {
-      path: "/",
-      element: <Landing />,
-    },]
+    path: "/",
+    children: [
+      {
+        path: "/",
+        element: <Landing />,
+      },]
   },
   {
     path: "/portfolios",
@@ -24,18 +24,18 @@ const router = createBrowserRouter([
 ])
 function App() {
   const [portfolioAssetsState, setPortfolioAssetsState] = useState([]);
-  const [calculatedAssets, setCalculatedAssets] = useState([[]]);
+  const [calculatedAssets, setCalculatedAssets] = useState([]);
 
-  
+
 
   return (
 
     <>
-    <Context.Provider value={{ portfolioAssetsState, setPortfolioAssetsState}}>
-      <CalculatedContext.Provider value={{ calculatedAssets, setCalculatedAssets}}>
-    <RouterProvider router={router} />
-    </CalculatedContext.Provider>
-      </Context.Provider> 
+      <Context.Provider value={{ portfolioAssetsState, setPortfolioAssetsState }}>
+        <CalculatedContext.Provider value={{ calculatedAssets, setCalculatedAssets }}>
+          <RouterProvider router={router} />
+        </CalculatedContext.Provider>
+      </Context.Provider>
 
       {/* <Context.Provider value={{ value:[portfolioAssetsState, setPortfolioAssetsState],
         value2: [calculatedAssets, setCalulclatedAssets]

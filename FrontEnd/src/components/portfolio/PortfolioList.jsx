@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { getMyAssets } from '../../services/portfolioAssetServices';
 import { getPortfolios } from '../../services/PortfoliosServices';
 import PortfolioCard from './PortfolioCard';
+import CalculatedContext from '../../context/calculatedContext';
 
 import Context from '../../context/Context';
 
@@ -9,6 +10,7 @@ const PortfolioList = () => {
   const { portfolioAssetsState, setPortfolioAssetsState } = useContext(Context);
   const [portfolios, setPortfolios] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log("THIS IS THE CALCULATED" + CalculatedContext)
 
   const fetchPortfolioAssets = async () => {
     try {
@@ -23,7 +25,7 @@ const PortfolioList = () => {
   const fetchPortfolios = async () => {
     try {
       const data = await getPortfolios(localStorage.getItem('token'));
-      
+
       setPortfolios(data);
     } catch (error) {
       console.error('Error fetching portfolios:', error);
@@ -56,9 +58,9 @@ const PortfolioList = () => {
           portfolioId={portfolio.id}
           portfolioName={portfolio.title}
           portfolioDescription={portfolio.description}
-          // pAndL={/* calculate P&L here */}
-          // percPAndL={/* calculate % P&L here */}
-          // lastUpdated={formatLastUpdated(portfolio.lastUpdated)}
+        // pAndL={/* calculate P&L here */}
+        // percPAndL={/* calculate % P&L here */}
+        // lastUpdated={formatLastUpdated(portfolio.lastUpdated)}
         />
       ))}
     </div>

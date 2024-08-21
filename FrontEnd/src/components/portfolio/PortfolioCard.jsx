@@ -1,4 +1,4 @@
-import React , {useContext} from 'react';
+import React, { useContext } from 'react';
 import AssetSummary from '../PortfolioAssets/AssetSummary';
 import AddAsset from '../PortfolioAssets/AddAsset';
 // import { biggestWinner, biggestLoser } from '../../utils/PortfolioCalucations';
@@ -13,13 +13,13 @@ const PortfolioCard = ({
   const modalId = `portfolioModal-${portfolioId}`;
 
   const { portfolioAssetsState } = useContext(Context);
-  console.log(  'Portfolio Assets State:', portfolioAssetsState);
+  console.log('Portfolio Assets State:', portfolioAssetsState);
   const { calculatedAssets } = useContext(CalculatedContext);
-
-  const portfolioAssets = portfolioAssetsState.filter( (portfolioAsset) => portfolioAsset.portfolio_id === portfolioId);
+  console.log("THIS IS THE OBJECTS TYPE" + Object.keys(calculatedAssets).length)
+  const portfolioAssets = portfolioAssetsState.filter((portfolioAsset) => portfolioAsset.portfolio_id === portfolioId);
   console.log('filtered Portfolio Assets:', portfolioAssets);
-  const calculatedPortfolioAssets = calculatedAssets.filter( (calculatedAsset) => portfolioAssets.map( (portfolioAsset) => portfolioAsset.port_asset_id).includes(calculatedAsset.portAssetId));
-  console.log('calculated Portfolio Assets:', calculatedPortfolioAssets);
+  // const calculatedPortfolioAssets = calculatedAssets.filter((calculatedAsset) => portfolioAssets.map((portfolioAsset) => portfolioAsset.port_asset_id).includes(calculatedAsset.portAssetId));
+  // console.log('calculated Portfolio Assets:', calculatedPortfolioAssets);
   console.log('Portfolio Assets:', portfolioAssets);
   // const bigWin = biggestWinner(portfolioAssets);
 
@@ -104,7 +104,7 @@ const PortfolioCard = ({
       <AddAsset
         portfolioId={portfolioId}
         portfolioName={portfolioName}
-        onSubmit={() => {/* refresh logic if needed */}}
+        onSubmit={() => {/* refresh logic if needed */ }}
       />
     </div>
   );

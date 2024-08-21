@@ -4,5 +4,14 @@ import React, { createContext, useState, useEffect } from 'react';
 
 
 const CalculatedContext = createContext();
+// const CalculatedProvider = (props) => {
+//     const [calculatedAssets, setCalculatedAssets] = useState([]);
+// const calculatedAssetContext: {
+//     calculatedAssetsContext: calculatedAssets,
+//     feedCalculatedAssets: 
+// }
+
+
+
 
 export default CalculatedContext;     
