@@ -1,5 +1,6 @@
 import React from "react";
 import ApiView from "./ApiView";
+import "../portfolio/PortfolioList.scss";
 
 const formatDate = (date) => {
     if (!date) return "N/A";
@@ -20,7 +21,7 @@ const AssetSummary = ({
 }) => {
     console.log('AssetSummary:', assetName, assetSymbol, datePurchased, dateSell, quantity, buyingPrice, sellingPrice, portAssetId);
     return (
-        <div>
+        <div className="summary">
             <h1>{assetName}</h1>
             <h2>{assetSymbol}</h2>
             <ApiView assetSymbol={assetSymbol}

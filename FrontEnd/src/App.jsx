@@ -5,8 +5,9 @@ import Context from './context/Context';
 import './App.css'
 import Landing from './pages/Landing'
 import MyPortfolio from './pages/MyPortfolio';
-import { useState } from 'react';
-import CalculatedContext from './context/calculatedContext';
+import Login from './pages/Login/Login';
+import SignUp from './pages/SignUp/SignUp';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,14 @@ const router = createBrowserRouter([
         path: "/",
         element: <Landing />,
       },]
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />,
   },
   {
     path: "/portfolios",
@@ -32,16 +41,12 @@ function App() {
 
     <>
       <Context.Provider value={{ portfolioAssetsState, setPortfolioAssetsState }}>
-        <CalculatedContext.Provider value={{ calculatedAssets, setCalculatedAssets }}>
           <RouterProvider router={router} />
-        </CalculatedContext.Provider>
-      </Context.Provider>
+        </Context.Provider>
+    
 
-      {/* <Context.Provider value={{ value:[portfolioAssetsState, setPortfolioAssetsState],
-        value2: [calculatedAssets, setCalulclatedAssets]
-      }}>
-      <RouterProvider router={router} />
-      </Context.Provider> */}
+   
+
 
     </>
   )

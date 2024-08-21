@@ -64,7 +64,7 @@ const PortfolioCard = ({
               ></button>
             </div>
             <div className="modal-body">
-              {portfolioAssets.map((portfolioAsset) => (
+              {/* {portfolioAssets.map((portfolioAsset) => (
                 <AssetSummary
                   key={portfolioAsset.id}
                   assetName={portfolioAsset.asset_name}
@@ -77,7 +77,7 @@ const PortfolioCard = ({
                   sellingPrice={portfolioAsset.price_sell}
                   portAssetId={portfolioAsset.port_asset_id}
                 />
-              ))}
+              ))} */}
               <button
                 className="btn btn-primary mt-3"
                 data-bs-toggle="modal"
