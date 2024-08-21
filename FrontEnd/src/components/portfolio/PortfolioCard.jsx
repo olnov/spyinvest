@@ -54,7 +54,7 @@ const PortfolioCard = ({
               ></button>
             </div>
             <div className="modal-body">
-              {portfolioAssets.map((portfolioAsset) => {
+              {/* {portfolioAssets.map((portfolioAsset) => {
                 if (portfolioAsset.portfolio_id === portfolioId) {
                   return (
                     <AssetSummary
@@ -70,7 +70,7 @@ const PortfolioCard = ({
                   );
                 }
                 return null;
-              })}
+              })} */}
 
               {/* Add Asset Button */}
               <button
