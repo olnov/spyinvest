@@ -22,37 +22,26 @@ const AddAsset = (props) => {
 
 
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    switch (id) {
-      case 'quantity':
-        setFormData({ ...formData, quantity: parseInt(value) });
-        break;
-      case 'buying_price':
-        setFormData({ ...formData, buying_price: parseInt(value) });
-        break;
-      case 'selling_price':
-        setFormData({ ...formData, selling_price: parseInt(value) });
-        break;
-      case 'quantity_sell':
-        setFormData({ ...formData, quantity_sell: parseInt(value) });
-        break;
-      default:
-        setFormData({
-          ...formData,
-          [id]: value
-        });
-        break;
-    }
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    const formattedDateSell = formData.date_sell ? new Date(formData.date_sell).toISOString() : null;
-    const formattedDatePurchased = formData.date_purchased ? new Date(formData.date_purchased).toISOString() : null;
-    const payload = { ...formData, date_sell: formattedDateSell, date_purchased: formattedDatePurchased }
-    await createAsset(token, payload);
+    if (formData.date_sell === '' || formData.selling_price === 0 || formData.quantity_sell === 0) {
+      formData.date_sell = null;
+      formData.selling_price = null;
+      formData.quantity_sell = null;
+    } else {
+      formData.date_sell = new Date(formData.date_sell).toISOString();
+    }
+    formData.date_purchased = new Date(formData.date_purchased).toISOString();
 
+    await createAsset(token, formData);
+    
     // Close AddAsset modal and reopen the original modal
     const addAssetModal = document.querySelector(`#addAssetModal-${portfolioId}`);
     const bootstrapAddAssetModal = new window.bootstrap.Modal(addAssetModal);
@@ -77,11 +66,11 @@ const AddAsset = (props) => {
               <input id="asset_name" type='text' placeholder='Asset Name' required value={formData.asset_name} onChange={handleChange} />
               <input id="asset_symbol" type='text' placeholder='Asset Symbol' required value={formData.asset_symbol} onChange={handleChange} />
               <input id="date_purchased" type='date' placeholder='Date Purchased' required value={formData.date_purchased} onChange={handleChange} />
-              <input id="date_sell" type='date' placeholder='Date Sell' value={formData.date_sell} onChange={handleChange} />
+              <input id="date_sell" type='date' placeholder='Date Sell'  value={formData.date_sell} onChange={handleChange} />
               <input id="quantity" type='number' placeholder='Quantity' required value={formData.quantity} onChange={handleChange} />
               <input id="buying_price" type='number' placeholder='Buying Price' required value={formData.buying_price} onChange={handleChange} />
-              <input id="selling_price" type='number' placeholder='Selling Price' value={formData.selling_price} onChange={handleChange} />
-              <input id="quantity_sell" type='number' placeholder='Quantity Sold' value={formData.quantity_sell} onChange={handleChange} />
+              <input id="selling_price" type='number' placeholder='Selling Price'  value={formData.selling_price} onChange={handleChange} />
+              <input id="quantity_sell" type='number' placeholder='Quantity Sold'  value={formData.quantity_sell} onChange={handleChange} />
               <button type='submit'>Add</button>
             </form>
           </div>
