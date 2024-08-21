@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { register , login} from "../../services/authServices";
 import "./SignUp.css";
 
@@ -10,6 +10,7 @@ export const SignUp = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
+
 
     const navigate = useNavigate();
 
@@ -32,8 +33,8 @@ export const SignUp = () => {
                 const data = await login(email, password)
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('userId', data.userId);
-                // updateLoginStatus()
-                navigate('/onboarding');
+                const id = localStorage.getItem('userId');
+                navigate(`/profile/${id}`);
 
             } else {
                 alert('Passwords do not match');
