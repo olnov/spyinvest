@@ -1,9 +1,9 @@
 var express = require('express');
-const { createUser, getAllUsers, getUserById, updateUser, deleteUser } = require('../controllers/User');
+const { getAllUsers, getUserById, updateUser, deleteUser } = require('../controllers/User');
 var router = express.Router();
 
-// Create new user
-router.post('/',createUser);
+// Create new user -> moved to auth route
+
 // Get all users
 router.get('/',getAllUsers);
 // Get user by id

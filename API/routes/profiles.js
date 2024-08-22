@@ -5,7 +5,7 @@ const multer = require('multer');
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Upload profile image
-router.post('/:id/upload', upload.single('photo'), uploadProfileImage);
+router.patch('/:id/upload', upload.single('profile_image'), uploadProfileImage);
 // Get profile image
 router.get('/:id', getProfileImage);
 

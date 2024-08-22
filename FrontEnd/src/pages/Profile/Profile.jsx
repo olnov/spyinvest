@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { TopBar } from "../../components/TopBar/TopBar";
 import { getUserProfile, updateUserProfile } from "../../services/userServices";
 import { useParams, useNavigate } from "react-router-dom";
+import { UploadDialog } from "../../components/ProfileImage/UploadDialog";
+import ProfileImage from "../../components/ProfileImage/ProfileImage";
 
 export const Profile = ()=> {
     const [name, setName] = useState("");
@@ -10,6 +12,7 @@ export const Profile = ()=> {
     const [birthDate, setBirthDate] = useState("");
     const [message, setMessage] = useState("");
     const [terms,setTerms] = useState(false)
+    const [showUploadDialog, setShowUploadDialog] = useState(false);
     const { id } = useParams();
     const currentUserId = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
@@ -84,6 +87,15 @@ export const Profile = ()=> {
         navigate('/portfolios');
     };
 
+
+    const handleOpenUploadDialog = () => {
+        setShowUploadDialog(true); // Show the upload dialog
+    };
+
+    const handleCloseUploadDialog = () => {
+        setShowUploadDialog(false); // Hide the upload dialog
+    };
+
     useEffect(()=> {
         const fetchProfileData = async ()=> {
             try {
@@ -108,9 +120,9 @@ export const Profile = ()=> {
         <div className="row">
         <div className="col-md-3 border-right">
             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img className="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" />
+                <ProfileImage userId={id} width="150" height="150"/>
                 { id === currentUserId ? ( 
-                    <span><button className="btn btn-primary">Change profile image</button></span>
+                    <span><button className="btn btn-primary" onClick={handleOpenUploadDialog}>Change profile image</button></span>
                 ):
                 (
                     <span></span>
@@ -165,6 +177,10 @@ export const Profile = ()=> {
             </div>
             </div>
             </div>
+            {/* Conditionally render the UploadDialog */}
+            {showUploadDialog && (
+                <UploadDialog show={showUploadDialog} onHide={handleCloseUploadDialog} userId={id} />
+            )}
         </>
     )
 }
