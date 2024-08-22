@@ -59,7 +59,7 @@ export const CurrentTotalValue = (portfolioAssets) => {
       }
     }
     if (biggestLoss < 0) {
-      return `${biggestLossAsset.asset_name} ${(biggestLoss*100/initialAssetValue(biggestLossAsset)).toFixed(2)}%`
+      return `${biggestLossAsset.asset_name}  ${((Math.abs(biggestLoss))*100/initialAssetValue(biggestLossAsset)).toFixed(2)}%`
     }
     return 'No Loss'
   }
