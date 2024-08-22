@@ -64,19 +64,19 @@ const PortfolioCard = ({
       <div className="port-card__biggest-loser"> Biggest Loser: {bigLoss} </div>
       {pandL > 0 ? (
         <>
-          <div className="port-card__p-and-l"> Profit: ${pandL} </div>
-          <div className="port-card__perc-p-and-l">{(pandL*100/initialValue).toFixed(2)} %</div>
+          <div className="port-card__p"> Profit: ${pandL} </div>
+          <div className="port-card__perc-p">{(pandL*100/initialValue).toFixed(2)} %</div>
         </>
       ) : (
         pandL < 0 ? (
           <>
-            <div className="port-card__p"> Loss: ${pandL} </div>
-            <div className="port-card__perc-p">{(pandL*100/initialValue).toFixed(2)} %</div>
+            <div className="port-card__l"> Loss: ${pandL} </div>
+            <div className="port-card__perc_l">{(pandL*100/initialValue).toFixed(2)} %</div>
           </>
         ) : (
           <>
-            <div className="port-card__l"> No Profit No Loss </div>
-            <div className="port-card__l"> 0 %</div>
+            <div className="port-card__z"> No Profit No Loss </div>
+            <div className="port-card__z"> 0 %</div>
           </>
         )
       )}
@@ -128,7 +128,7 @@ const PortfolioCard = ({
         portfolioId={portfolioId}
         portfolioName={portfolioName}
 
-        fetchPortfolioAssets={fetchPortfolioAssets}
+        
         showAssetModal={showAssetModal}
         handleToggleAssetModal={handleToggleAssetModal}
 

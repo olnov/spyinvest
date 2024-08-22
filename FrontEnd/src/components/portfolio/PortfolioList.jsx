@@ -75,7 +75,9 @@ const PortfolioList = () => {
 
   return (
     <div>
+      <Dashboard assets={assets}/>
       <h1>Portfolios</h1>
+      
       <Accordion flush>
         {portfolios.map((portfolio, index) => (
           <Accordion.Item eventKey={index.toString()} key={portfolio.id}>
@@ -102,7 +104,7 @@ const PortfolioList = () => {
               </PortfolioCard>
             </Accordion.Header>
             <Accordion.Body>
-              {portfolioAssets.map((portfolioAsset) => {
+              {assets.map((portfolioAsset) => {
                 if (portfolioAsset.portfolio_id === portfolio.id) {
                   return (
                     <>
