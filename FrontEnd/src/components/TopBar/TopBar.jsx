@@ -1,9 +1,11 @@
 import React from "react";
 import Logo from "../../assets/logo-si-5.png";
 import { useNavigate } from "react-router-dom";
+import ProfileImage from "../ProfileImage/ProfileImage";
 
 export const TopBar = ()=>{
     const token = localStorage.getItem('token');
+    const id = localStorage.getItem('userId');
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -35,18 +37,19 @@ export const TopBar = ()=>{
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                    <a className="nav-link fs-5 link-underline-opacity-100-hover" aria-current="page" href="/portfolio">Portfolio</a>
+                    <a className="nav-link fs-5 link-underline-opacity-100-hover" aria-current="page" href="/portfolios">Portfolio</a>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link fs-5" aria-current="page" href="/dashboard">My dashboard</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link fs-5" aria-current="page" href="/profile">Profile settings</a>
+                    <a className="nav-link fs-5" aria-current="page" href={'/profile/' + id}>Profile settings</a>
                 </li>
             </ul>
         </div>
         </div>
         <div className="d-flex">
+            <ProfileImage userId={id} width="40" height="40" />&nbsp;
             <button className="btn btn-outline-primary me-2" onClick={handleLogout}>Logout</button>
         </div></>  
         )}

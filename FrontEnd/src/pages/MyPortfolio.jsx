@@ -1,13 +1,46 @@
 import PortfolioList from "../components/portfolio/PortfolioList";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CreatePortfolioForm from "../components/input/CreatePortfolioForm";
 import { createPortfolio } from "../services/PortfoliosServices";
 import { TopBar } from "../components/TopBar/TopBar";
+import { getUserProfile } from "../services/userServices";
 
 // My portfolio  -> portfolio list  | create portfolio
 
 const MyPortfolio = () => {
   const [formData, setFormData] = useState({});
+  const token = localStorage.getItem('token');
+  const currentUserId = localStorage.getItem('userId');
+  const [termsAccepted, setTermsAccepted] = useState(null);
+
+  const checkTerms = async () => {
+    try {
+      const profile = await getUserProfile(token, currentUserId);
+      const terms_accepted = profile.terms_accepted;
+      setTermsAccepted(profile.terms_accepted);
+    }catch(error){
+      console.log(error);
+    }
+  }
+
+  useEffect(()=> {
+    checkTerms();
+  },[]);
+
+  if (termsAccepted === null) {
+    // While we are checking the terms, we can show a loading spinner or nothing
+    return <div>Loading...</div>;
+  }
+
+  if (!termsAccepted) {
+    // If terms are not accepted, prevent the page from rendering
+    return (
+      <>
+      <TopBar />
+      <div><h5>You must accept the terms of use to access your portfolio.</h5></div>
+      </>
+    )
+  }
 
   const handleChange = (id, value) => {
     setFormData({ ...formData, [id]: value });
@@ -43,6 +76,7 @@ const MyPortfolio = () => {
         role="dialog"
         aria-labelledby="createModalLabel"
         aria-hidden="true"
+        style={{ minWidth: "800px" }}
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">

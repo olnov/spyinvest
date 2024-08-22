@@ -25,17 +25,30 @@ const User = sequelize.define('User', {
         allowNull: false,
     },
     photo: {
-        type: DataTypes.BLOB,
+        type: DataTypes.TEXT,
     },
     gender: {
         type: DataTypes.STRING(1),
     },
     birth_date: {
         type: DataTypes.DATE,
+        get() {
+            const rawDate = this.getDataValue('birth_date');
+            return rawDate ? rawDate.toISOString().split('T')[0] : null;
+          },
     },
     registred_at: {
         type: DataTypes.DATE,
         allowNull: false,
+        get() {
+            const rawDate = this.getDataValue('registred_at');
+            return rawDate ? rawDate.toISOString().split('T')[0] : null;
+          },
+    },
+    terms_accepted: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
     }
 }, {
     tableName: 'users',
@@ -48,10 +61,10 @@ const User = sequelize.define('User', {
         }
         },
         beforeUpdate: async (user) => {
-            if (user.password) {
-            const salt = await bcrypt.genSalt(10);
-            user.password = await bcrypt.hash(user.password, salt);
-        }
+            if (user.changed('password')) {
+                const salt = await bcrypt.genSalt(10);
+                user.password = await bcrypt.hash(user.password, salt);
+            }
         },
     }
 });

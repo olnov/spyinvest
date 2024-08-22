@@ -9,6 +9,7 @@ const formatDate = (date) => {
     return parsedDate.toLocaleDateString();
 };
 
+
 const AssetSummary = ({ 
     assetName, 
     assetSymbol, 
@@ -20,6 +21,7 @@ const AssetSummary = ({
     sellingPrice,
     portAssetId,
     currentPrice
+
 }) => {
     console.log('AssetSummary:', assetName, assetSymbol, datePurchased, dateSell, quantity, buyingPrice, sellingPrice, portAssetId);
     return (
@@ -27,6 +29,7 @@ const AssetSummary = ({
             <div className = "summary__header">
             <h1>{assetName}</h1>
             <h2>{assetSymbol}</h2>
+
             <h5>Delta: {deltaPercentage(buyingPrice, currentPrice).toFixed(2)}%</h5>
             </div>
             <div className="static-info">            
@@ -38,6 +41,7 @@ const AssetSummary = ({
             <div className="dynamic-info">
             <h5>Current: $ {currentPrice}</h5>
             <h5>Total: $ {currentValue(quantity, currentPrice).toFixed(2)}</h5>
+
             {sellingPrice && <h5>Sell Price: ${sellingPrice.toFixed(2)}</h5>}
             </div>
             </div>

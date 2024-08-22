@@ -7,6 +7,7 @@ import Landing from './pages/Landing'
 import MyPortfolio from './pages/MyPortfolio';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
+import Profile from './pages/Profile/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/portfolios",
     element: <MyPortfolio />,
+  },
+  {
+    path: "/profile/:id",
+    element: <Profile />,
   }
 ])
 function App() {
