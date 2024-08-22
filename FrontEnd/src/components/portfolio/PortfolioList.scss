@@ -13,7 +13,7 @@ $modal-background-color: rgba(0, 0, 0, 0);
   padding: 10px;
   margin: 10px auto;
   text-align: center; // Center the text within the card
-  max-width: 400px; // Set a max width for the card to keep it centered
+  min-width: 850px; // Set a max width for the card to keep it centered
   // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative; // Position the modal relative to the card
 
@@ -43,9 +43,9 @@ $modal-background-color: rgba(0, 0, 0, 0);
 }
 
 .accordion-button::after {
-    display: none; // Hide the default arrow icon
-    background-color: red;
-  }
+  display: none; // Hide the default arrow icon
+  background-color: red;
+}
 
 .accordion-button.collapsed {
   display: table;
@@ -78,22 +78,27 @@ $modal-background-color: rgba(0, 0, 0, 0);
   padding: 15px; // Padding inside the box
   margin-bottom: 20px; // Space between each box
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow for a lifted effect
-  max-width: 400px; // Control width of the box
+  max-width: 200px; // Control width of the box
   margin: 10px auto; // Center the box within its container
-  
-      h1 {
-        font-size: 0.7rem; // Slightly smaller text on smaller screens
-      }
-  
-      h2 {
-        font-size: 1.5rem; // Adjust size of the symbol
-      }
-  
-      h3, h4, h5, h6 {
-        font-size: 0.5rem; // Adjust size of other text elements
-      }
-  
-      h4, h5, h6 {
-        font-size: 1rem; // Make smaller text even smaller
-      }
-    }
+
+  h1 {
+    font-size: 0.7rem; // Slightly smaller text on smaller screens
+  }
+
+  h2 {
+    font-size: 1.5rem; // Adjust size of the symbol
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 0.5rem; // Adjust size of other text elements
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: 1rem; // Make smaller text even smaller
+  }
+}

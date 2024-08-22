@@ -76,6 +76,7 @@ const MyPortfolio = () => {
         role="dialog"
         aria-labelledby="createModalLabel"
         aria-hidden="true"
+        style={{ minWidth: "800px" }}
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
