@@ -1,6 +1,7 @@
 import React from "react";
 import Logo from "../../assets/logo-si-5.png";
 import { useNavigate } from "react-router-dom";
+import ProfileImage from "../ProfileImage/ProfileImage";
 
 export const TopBar = ()=>{
     const token = localStorage.getItem('token');
@@ -48,6 +49,7 @@ export const TopBar = ()=>{
         </div>
         </div>
         <div className="d-flex">
+            <ProfileImage userId={id} width="40" height="40" />&nbsp;
             <button className="btn btn-outline-primary me-2" onClick={handleLogout}>Logout</button>
         </div></>  
         )}

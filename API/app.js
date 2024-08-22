@@ -17,6 +17,7 @@ const usersRouter = require('./routes/users');
 const assetsRouter = require('./routes/assets');
 const portfoliosRouter = require('./routes/portfolios');
 const portfolioAssetsRouter = require('./routes/portfolioAssets');
+const profieImagesRouter = require('./routes/profiles');
 const tokenChecker = require('./middleware/tokenChecker');
 
 
@@ -44,6 +45,7 @@ app.use('/users', tokenChecker, usersRouter);
 app.use('/assets', tokenChecker,  assetsRouter);
 app.use('/portfolios',tokenChecker,  portfoliosRouter);
 app.use('/portfolio_assets', tokenChecker, portfolioAssetsRouter);
+app.use('/profiles', profieImagesRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // catch 404 and forward to error handler
