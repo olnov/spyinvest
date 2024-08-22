@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
+import { useState } from 'react';
 import Context from './context/Context';
 
 import './App.css'
@@ -33,8 +33,6 @@ const router = createBrowserRouter([
 ])
 function App() {
   const [portfolioAssetsState, setPortfolioAssetsState] = useState([]);
-  const [calculatedAssets, setCalculatedAssets] = useState([]);
-
 
 
   return (
@@ -43,11 +41,6 @@ function App() {
       <Context.Provider value={{ portfolioAssetsState, setPortfolioAssetsState }}>
           <RouterProvider router={router} />
         </Context.Provider>
-    
-
-   
-
-
     </>
   )
 }

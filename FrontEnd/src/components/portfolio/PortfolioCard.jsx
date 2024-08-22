@@ -1,28 +1,38 @@
-import React, { useContext } from 'react';
-import AssetSummary from '../PortfolioAssets/AssetSummary';
 import AddAsset from '../PortfolioAssets/AddAsset';
 // import { biggestWinner, biggestLoser } from '../../utils/PortfolioCalucations';
 import Context from '../../context/Context';
-import CalculatedContext from '../../context/calculatedContext';
+import { useContext, useEffect, useState } from 'react';
+import { CurrentTotalValue, initialTotalValue, calculateBigWin, calculateBigLoss,  calculatePandL} from '../../utils/PortfolioCalucations'
+
 
 const PortfolioCard = ({
   portfolioId,
   portfolioName,
   portfolioDescription,
+  portfolioAssets,
 }) => {
   const modalId = `portfolioModal-${portfolioId}`;
 
-  const { portfolioAssetsState } = useContext(Context);
-  console.log('Portfolio Assets State:', portfolioAssetsState);
-  const { calculatedAssets } = useContext(CalculatedContext);
-  console.log("THIS IS THE OBJECTS TYPE" + Object.keys(calculatedAssets).length)
-  const portfolioAssets = portfolioAssetsState.filter((portfolioAsset) => portfolioAsset.portfolio_id === portfolioId);
-  console.log('filtered Portfolio Assets:', portfolioAssets);
-  // const calculatedPortfolioAssets = calculatedAssets.filter((calculatedAsset) => portfolioAssets.map((portfolioAsset) => portfolioAsset.port_asset_id).includes(calculatedAsset.portAssetId));
-  // console.log('calculated Portfolio Assets:', calculatedPortfolioAssets);
-  console.log('Portfolio Assets:', portfolioAssets);
-  // const bigWin = biggestWinner(portfolioAssets);
+  const [currentValue, setCurrentValue] = useState(0);
+  const [initialValue, setInitialValue] = useState(0);
+  const [bigWin, setBigWin] = useState(0);
+  const [bigLoss, setBigLoss] = useState(0);
+  const [pandL, setPandL] = useState(0);
 
+
+  console.log('THESE ARE THE ASSETS I HAVE RECEIVED FROM THE LIST: ', portfolioAssets);
+
+
+
+
+  
+  useEffect(() => {
+    setCurrentValue(CurrentTotalValue(portfolioAssets));
+    setInitialValue(initialTotalValue(portfolioAssets));
+    setBigWin(calculateBigWin(portfolioAssets));
+    setBigLoss(calculateBigLoss(portfolioAssets));
+    setPandL(calculatePandL(portfolioAssets));
+  }, [portfolioAssets]);
 
   return (
     <div className="port-card">
@@ -34,12 +44,30 @@ const PortfolioCard = ({
       >
         {portfolioName}
       </div>
-      <div className="port-card__description">{portfolioDescription}</div>
-      <div className="port-card__total-investment">$Here: {calculatedAssets.currentValue}</div>
-      {/* <div className="port-card__biggest-winner"> {bigWin} </div> */}
-      <div className="port-card__p-and-l">{/* P&L logic here */}</div>
-      <div className="port-card__perc-p-and-l">{/* % P&L logic here */}</div>
-      <div className="port-card__last-updated">{/* last updated date */}</div>
+      <div className="port-card__description">{}</div>
+      <div className="port-card__total-investment"> Initial Value: ${initialValue}</div>
+      <div className="port-card__current-value">Current Value: ${currentValue}</div>
+      <div className="port-card__biggest-winner"> Biggest Winner: {bigWin} </div>
+      <div className="port-card__biggest-loser"> Biggest Loser: {bigLoss} </div>
+      {pandL > 0 ? (
+        <>
+          <div className="port-card__p-and-l"> Profit: ${pandL} </div>
+          <div className="port-card__perc-p-and-l">{(pandL*100/initialValue).toFixed(2)} %</div>
+        </>
+      ) : (
+        pandL < 0 ? (
+          <>
+            <div className="port-card__p"> Loss: ${pandL} </div>
+            <div className="port-card__perc-p">{(pandL*100/initialValue).toFixed(2)} %</div>
+          </>
+        ) : (
+          <>
+            <div className="port-card__l"> No Profit No Loss </div>
+            <div className="port-card__l"> 0 %</div>
+          </>
+        )
+      )}
+
 
       {/* Portfolio Modal */}
       <div
