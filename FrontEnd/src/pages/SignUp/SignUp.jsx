@@ -69,44 +69,47 @@ export const SignUp = () => {
                     <div className="row">
                       <div className="col-md-6 mb-4">
                         <div data-mdb-input-init className="form-outline">
+                        
                           <input
                             type="text"
                             id="name"
                             name="name"
                             className="form-control"
                             onChange={handleChange}
+                            placeholder="First name"
                           />
                           <label className="form-label" htmlFor="name">
-                            First name
                           </label>
                         </div>
                       </div>
                       <div className="col-md-6 mb-4">
                         <div data-mdb-input-init className="form-outline">
+                        <label className="form-label" htmlFor="surname">
+
                           <input
                             type="text"
                             id="surname"
                             name="surname"
                             className="form-control"
+                            placeholder="Last name"
                             onChange={handleChange}
                           />
-                          <label className="form-label" htmlFor="surname">
-                            Last name
                           </label>
                         </div>
                       </div>
                     </div>
 
                     <div data-mdb-input-init className="form-outline mb-4">
+                    
                       <input
                         type="email"
                         id="email"
                         name="email"
                         className="form-control"
+                        placeholder="Email address"
                         onChange={handleChange}
                       />
                       <label className="form-label" htmlFor="email">
-                        Email address
                       </label>
                     </div>
 
@@ -117,9 +120,10 @@ export const SignUp = () => {
                         name="password"
                         className="form-control"
                         onChange={handleChange}
+                        placeholder="Password"
                       />
                       <label className="form-label" htmlFor="password">
-                        Password
+                    
                       </label>
                     </div>
 
@@ -129,10 +133,11 @@ export const SignUp = () => {
                         id="confirmPassword"
                         name="confirmPassword"
                         className="form-control"
+                        placeholder="Confirm password"
                         onChange={handleChange}
                       />
                       <label className="form-label" htmlFor="confirmPassword">
-                        Confirm password
+                      
                       </label>
                     </div>
 

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import CreatePortfolioForm from "../components/input/CreatePortfolioForm";
 import { createPortfolio } from "../services/PortfoliosServices";
 import { getUserProfile } from "../services/userServices";
+import { TopBar } from "../components/TopBar/TopBar";
 // My portfolio  -> portfolio list  | create portfolio
 
 const MyPortfolio = () => {
@@ -60,6 +61,7 @@ const MyPortfolio = () => {
 
   return (
     <>
+      <TopBar />
       <div className="portfolio-list">
         <PortfolioList />
       </div>

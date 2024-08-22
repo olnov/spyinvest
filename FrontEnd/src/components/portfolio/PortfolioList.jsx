@@ -56,17 +56,15 @@ const PortfolioList = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <h1>Loading...</h1>;
   }
 
   if (!portfolios.length) {
-    return <div>No portfolios available.</div>;
+    return <h1 style={{ color: "white" }}>No portfolios available.</h1>;
   }
 
   return (
     <div>
-      <TopBar />
-
       <Dashboard assets={assets} />
       <br />
 
