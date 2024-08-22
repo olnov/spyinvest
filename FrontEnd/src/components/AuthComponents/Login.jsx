@@ -1,8 +1,7 @@
-import React from 'react';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 import { login } from '../../services/authServices';
-import {getUserInfo} from '../../services/userServices';
+
 
 export const Login = () => {
     const [email, setEmail] = useState('');

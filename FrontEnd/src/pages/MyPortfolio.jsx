@@ -2,30 +2,27 @@ import PortfolioList from "../components/portfolio/PortfolioList";
 import { useState, useEffect } from "react";
 import CreatePortfolioForm from "../components/input/CreatePortfolioForm";
 import { createPortfolio } from "../services/PortfoliosServices";
-import { TopBar } from "../components/TopBar/TopBar";
 import { getUserProfile } from "../services/userServices";
-
 // My portfolio  -> portfolio list  | create portfolio
 
 const MyPortfolio = () => {
   const [formData, setFormData] = useState({});
-  const token = localStorage.getItem('token');
-  const currentUserId = localStorage.getItem('userId');
+  const token = localStorage.getItem("token");
+  const currentUserId = localStorage.getItem("userId");
   const [termsAccepted, setTermsAccepted] = useState(null);
 
   const checkTerms = async () => {
     try {
       const profile = await getUserProfile(token, currentUserId);
-      const terms_accepted = profile.terms_accepted;
       setTermsAccepted(profile.terms_accepted);
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  useEffect(()=> {
+  useEffect(() => {
     checkTerms();
-  },[]);
+  }, []);
 
   if (termsAccepted === null) {
     // While we are checking the terms, we can show a loading spinner or nothing
@@ -36,10 +33,13 @@ const MyPortfolio = () => {
     // If terms are not accepted, prevent the page from rendering
     return (
       <>
-      <TopBar />
-      <div><h5>You must accept the terms of use to access your portfolio.</h5></div>
+        {/* <TopBar /> */}
+
+        <div>
+          <h5>You must accept the terms of use to access your portfolio.</h5>
+        </div>
       </>
-    )
+    );
   }
 
   const handleChange = (id, value) => {
@@ -60,8 +60,6 @@ const MyPortfolio = () => {
 
   return (
     <>
-      <TopBar />
-      <h1>My Portfolio</h1>
       <div className="portfolio-list">
         <PortfolioList />
       </div>
