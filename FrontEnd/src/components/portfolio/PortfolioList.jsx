@@ -1,18 +1,29 @@
-import { useState, useEffect } from 'react';
+
+import { useState, useContext, useEffect } from 'react';
+import { fetchAssetsandCurrentPrices } from '../../services/assetsServices';
 import { getMyAssets } from '../../services/portfolioAssetServices';
+
 import { getPortfolios } from '../../services/PortfoliosServices';
 import PortfolioCard from './PortfolioCard';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import AssetSummary from '../PortfolioAssets/AssetSummary';
+
+import Dashboard from '../Dashboard/Dashboard'
+
 import AddAsset from '../PortfolioAssets/AddAsset';
+
 import './PortfolioList.scss';
 
-// Portfolio List - displays all portfolios and their assets - This is the heart of the application
+
+import Context from '../../context/Context';
 
 const PortfolioList = () => {
-  const [portfolioAssets, setPortfolioAssets] = useState([]);
+  const { portfolioAssetsState, setPortfolioAssetsState } = useContext(Context);
   const [portfolios, setPortfolios] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+
   const [showAssetModal, setShowAssetModal] = useState(false);
   const [showPotforlioModal, setShowPortfolioModal] = useState(false)
 
@@ -21,15 +32,30 @@ const PortfolioList = () => {
     setShowPortfolioModal(!showPotforlioModal)
   }
 
+
   const fetchPortfolioAssets = async () => {
-    const data = await getMyAssets(localStorage.getItem('token'));
-    setPortfolioAssets(data);
+    try {
+      const data = await fetchAssetsandCurrentPrices(localStorage.getItem('token'));
+      setPortfolioAssetsState(data);
+      console.log('Fetch Portfolio Assets data:', portfolioAssetsState);
+    } catch (error) {
+      console.error('Error fetching portfolio assets:', error);
+    }
   };
 
+  const assets = portfolioAssetsState;
   const fetchPortfolios = async () => {
-    const data = await getPortfolios(localStorage.getItem('token'));
-    setPortfolios(data)
-    // console.log('Fetch Portfolio data: ' + data);
+
+    try {
+      const data = await getPortfolios(localStorage.getItem('token'));
+
+      setPortfolios(data);
+    } catch (error) {
+      console.error('Error fetching portfolios:', error);
+    } finally {
+      setLoading(false);
+    }
+
   };
 
   useEffect(() => {
@@ -37,15 +63,15 @@ const PortfolioList = () => {
     fetchPortfolios();
   }, []);
 
-  const calculatePortfolioValue = (portfolioId) => {
-    let totalValue = 0;
-    portfolioAssets.forEach((portfolioAsset) => {
-      if (portfolioAsset.portfolio_id === portfolioId) {
-        totalValue += portfolioAsset.quantity_purchase * portfolioAsset.price_buy;
-      }
-    });
-    return totalValue;
-  };
+
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!portfolios.length) {
+    return <div>No portfolios available.</div>;
+  }
 
   return (
     <div>
@@ -64,16 +90,11 @@ const PortfolioList = () => {
               </button> */}
               <PortfolioCard
                 key={portfolio.id}
-                portfolioId={portfolio.id}
-                portfolioName={portfolio.title}
-                portfolioDescription={portfolio.description}
-
-                totalInvestment={calculatePortfolioValue(portfolio.id)}
-                // pAndL={/* calculate P&L here */}
-                // percPAndL={/* calculate % P&L here */}
-                // lastUpdated={/* format last updated date */}
-                portfolioAssets={portfolioAssets}
-                fetchPortfolioAssets={fetchPortfolioAssets}
+              portfolioId={portfolio.id}
+              portfolioName={portfolio.title}
+              portfolioDescription={portfolio.description}
+              portfolioAssets={portfolioAssetsState.filter((portfolioAsset) => portfolioAsset.portfolio_id === portfolio.id)}
+              fetchPortfolioAssets={fetchPortfolioAssets}
 
               >
 
@@ -86,15 +107,18 @@ const PortfolioList = () => {
                   return (
                     <>
                       <AssetSummary
-                        key={portfolioAsset.id}
-                        assetName={portfolioAsset.asset_name}
-                        assetSymbol={portfolioAsset.symbol}
-                        datePurchased={portfolioAsset.date_purchased}
-                        dateSell={portfolioAsset.date_sell}
-                        quantity={portfolioAsset.quantity_purchase}
-                        buyingPrice={portfolioAsset.price_buy}
-                        sellingPrice={portfolioAsset.price_sell}
-                      />
+                  key={portfolioAsset.id}
+                  assetName={portfolioAsset.asset_name}
+                  assetSymbol={portfolioAsset.symbol}
+                  datePurchased={portfolioAsset.date_purchased}
+                  dateSell={portfolioAsset.date_sell}
+                  quantity={portfolioAsset.quantity_purchase}
+                  qtysell={portfolioAsset.quantity_sell}
+                  buyingPrice={portfolioAsset.price_buy}
+                  sellingPrice={portfolioAsset.price_sell}
+                  portAssetId={portfolioAsset.port_asset_id}
+                  currentPrice = {portfolioAsset.currentPrice}
+                  />
 
 
                     </>
@@ -115,7 +139,6 @@ const PortfolioList = () => {
               </Button>
 
             </Accordion.Body>
-
           </Accordion.Item>
 
         ))}

@@ -1,11 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { useState } from 'react';
+import Context from './context/Context';
 
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Landing from './pages/Landing'
-import WholeViewOfAssets from './pages/WholeViewOfAssets'
 import MyPortfolio from './pages/MyPortfolio';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
@@ -14,12 +12,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
   {
-  path: "/",
-  children: [
-    {
-      path: "/",
-      element: <Landing />,
-    },]
+    path: "/",
+    children: [
+      {
+        path: "/",
+        element: <Landing />,
+      },]
   },
   {
     path: "/login",
@@ -39,14 +37,15 @@ const router = createBrowserRouter([
   }
 ])
 function App() {
+  const [portfolioAssetsState, setPortfolioAssetsState] = useState([]);
 
 
   return (
 
     <>
-
-      <RouterProvider router={router} />
-
+      <Context.Provider value={{ portfolioAssetsState, setPortfolioAssetsState }}>
+          <RouterProvider router={router} />
+        </Context.Provider>
     </>
   )
 }
