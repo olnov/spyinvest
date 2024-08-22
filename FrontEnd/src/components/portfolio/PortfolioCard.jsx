@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AssetSummary from '../PortfolioAssets/AssetSummary';
 import AddAsset from '../PortfolioAssets/AddAsset';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 const PortfolioCard = ({
   portfolioName,
@@ -13,14 +15,21 @@ const PortfolioCard = ({
   portfolioAssets,
   fetchPortfolioAssets,
 }) => {
-  const modalId = `portfolioModal-${portfolioId}`;
+  const [showAssetModal, setShowAssetModal] = useState(false);
+  const [showPotforlioModal, setShowPortfolioModal] = useState(false)
+
+  const handleToggleAssetModal = () => {
+    setShowAssetModal(!showAssetModal)
+    setShowPortfolioModal(!showPotforlioModal)
+  }
 
   return (
     <div className="port-card">
       <div
         className="port-card__name"
-        data-bs-toggle="modal"
-        data-bs-target={`#${modalId}`}
+        // data-bs-toggle="modal"
+        // data-bs-target={`#${modalId}`}
+        onClick={() => setShowPortfolioModal(true)}
         style={{ cursor: 'pointer' }}
       >
         {portfolioName}
@@ -32,74 +41,47 @@ const PortfolioCard = ({
       <div className="port-card__last-updated">{lastUpdated}</div>
 
       {/* Portfolio Modal */}
-      <div
-        className="modal fade"
-        id={modalId}
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby={`${modalId}Label`}
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id={`${modalId}Label`}>
-                {portfolioName}
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              {/* {portfolioAssets.map((portfolioAsset) => {
-                if (portfolioAsset.portfolio_id === portfolioId) {
-                  return (
-                    <AssetSummary
-                      key={portfolioAsset.id}
-                      assetName={portfolioAsset.asset_name}
-                      assetSymbol={portfolioAsset.symbol}
-                      datePurchased={portfolioAsset.date_purchased}
-                      dateSell={portfolioAsset.date_sell}
-                      quantity={portfolioAsset.quantity_purchase}
-                      buyingPrice={portfolioAsset.price_buy}
-                      sellingPrice={portfolioAsset.price_sell}
-                    />
-                  );
-                }
-                return null;
-              })} */}
+      <Modal style={{ minWidth: "890px" }} backdrop="static" show={showPotforlioModal} onHide={() => setShowPortfolioModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title> {portfolioName}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+          {portfolioAssets.map((portfolioAsset) => {
+            if (portfolioAsset.portfolio_id === portfolioId) {
+              return (
+                <AssetSummary
+                  key={portfolioAsset.id}
+                  assetName={portfolioAsset.asset_name}
+                  assetSymbol={portfolioAsset.symbol}
+                  datePurchased={portfolioAsset.date_purchased}
+                  dateSell={portfolioAsset.date_sell}
+                  quantity={portfolioAsset.quantity_purchase}
+                  buyingPrice={portfolioAsset.price_buy}
+                  sellingPrice={portfolioAsset.price_sell}
+                />
+              );
+            }
+            return null;
+          })}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleToggleAssetModal}>
+            Add Asset
+          </Button>
+          {/* <Button variant="secondary" onClick={handleToggleAssetModal}>
+            Close
+          </Button> */}
 
-              {/* Add Asset Button */}
-              <button
-                className="btn btn-primary mt-3"
-                data-bs-toggle="modal"
-                data-bs-target={`#addAssetModal-${portfolioId}`}
-                data-bs-dismiss="modal"
-              >
-                Add Asset
-              </button>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+        </Modal.Footer>
+      </Modal>
 
       {/* AddAsset Component */}
       <AddAsset
         portfolioId={portfolioId}
         portfolioName={portfolioName}
-        onSubmit={fetchPortfolioAssets}
+        fetchPortfolioAssets={fetchPortfolioAssets}
+        showAssetModal={showAssetModal}
+        handleToggleAssetModal={handleToggleAssetModal}
       />
     </div>
   );

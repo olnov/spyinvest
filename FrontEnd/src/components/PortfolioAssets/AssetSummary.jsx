@@ -8,21 +8,21 @@ const formatDate = (date) => {
     return parsedDate.toLocaleDateString();
 };
 
-const AssetSummary = ({ 
-    assetName, 
-    assetSymbol, 
-    date_purchase, 
-    dateSell, 
-    quantity, 
-    buyingPrice, 
-    sellingPrice 
+const AssetSummary = ({
+    assetName,
+    assetSymbol,
+    date_purchase,
+    dateSell,
+    quantity,
+    buyingPrice,
+    sellingPrice
 }) => {
     return (
         <div className="summary">
             <h1>{assetName}</h1>
             <h2>{assetSymbol}</h2>
             <ApiView assetSymbol={assetSymbol} />
-            
+
             <h3>Purchase Date: {formatDate(date_purchase)}</h3>
             <h5>Quantity Bought: {quantity}</h5>
             <h6>Buy Price: ${buyingPrice.toFixed(2)}</h6>
