@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -12,13 +12,14 @@ export const UploadDialog = ({ show, onHide, userId }) => {
   };
 
   const handleUpload = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     if (!selectedFile) {
       alert("Please select a file to upload.");
       return;
     }
 
-    if (selectedFile.size > 1024 * 1024) { // 1MB size limit
+    if (selectedFile.size > 1024 * 1024) {
+      // 1MB size limit
       alert("File size exceeds the 1MB limit.");
       return;
     }
@@ -54,10 +55,10 @@ export const UploadDialog = ({ show, onHide, userId }) => {
       <Modal.Body>
         <form onSubmit={handleUpload}>
           <p>Select an image to upload as your profile picture.</p>
-          <input 
-            type="file" 
-            className="form-control" 
-            onChange={handleFileChange} 
+          <input
+            type="file"
+            className="form-control"
+            onChange={handleFileChange}
             accept="image/*" // Optional: Restrict to image files
           />
         </form>

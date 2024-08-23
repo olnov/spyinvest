@@ -1,12 +1,15 @@
-import React from "react";
-import { initialValue, currentValue, deltaPrice, deltaPercentage } from "../../utils/AssetCalculations";
+import {
+  initialValue,
+  currentValue,
+  deltaPercentage,
+} from "../../utils/AssetCalculations";
 
 import "../portfolio/PortfolioList.scss";
 
 const formatDate = (date) => {
-    if (!date) return "N/A";
-    const parsedDate = new Date(date);
-    return parsedDate.toLocaleDateString();
+  if (!date) return "N/A";
+  const parsedDate = new Date(date);
+  return parsedDate.toLocaleDateString();
 };
 
 
@@ -46,6 +49,7 @@ const AssetSummary = ({
             </div>
         </div>
     );
+
 };
 
 export default AssetSummary;

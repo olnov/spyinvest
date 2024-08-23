@@ -1,14 +1,16 @@
+import { useEffect, useState } from "react";
+import {
+  CurrentTotalValue,
+  initialTotalValue,
+  calculateBigWin,
+  calculateBigLoss,
+  calculatePandL,
+} from "../../utils/PortfolioCalucations";
 
-
-import Context from '../../context/Context';
-import { useContext, useEffect, useState } from 'react';
-import { CurrentTotalValue, initialTotalValue, calculateBigWin, calculateBigLoss, calculatePandL } from '../../utils/PortfolioCalucations'
-
-
-import AssetSummary from '../PortfolioAssets/AssetSummary';
-import AddAsset from '../PortfolioAssets/AddAsset';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import AssetSummary from "../PortfolioAssets/AssetSummary";
+import AddAsset from "../PortfolioAssets/AddAsset";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 
 const PortfolioCard = ({
@@ -18,12 +20,12 @@ const PortfolioCard = ({
   portfolioAssets,
 }) => {
   const [showAssetModal, setShowAssetModal] = useState(false);
-  const [showPotforlioModal, setShowPortfolioModal] = useState(false)
+  const [showPotforlioModal, setShowPortfolioModal] = useState(false);
 
   const handleToggleAssetModal = () => {
-    setShowAssetModal(!showAssetModal)
-    setShowPortfolioModal(!showPotforlioModal)
-  }
+    setShowAssetModal(!showAssetModal);
+    setShowPortfolioModal(!showPotforlioModal);
+  };
 
   const [currentValue, setCurrentValue] = useState(0);
   const [initialValue, setInitialValue] = useState(0);
@@ -31,13 +33,10 @@ const PortfolioCard = ({
   const [bigLoss, setBigLoss] = useState(0);
   const [pandL, setPandL] = useState(0);
 
-
-  console.log('THESE ARE THE ASSETS I HAVE RECEIVED FROM THE LIST: ', portfolioAssets);
-
-
-
-
-
+  console.log(
+    "THESE ARE THE ASSETS I HAVE RECEIVED FROM THE LIST: ",
+    portfolioAssets
+  );
   useEffect(() => {
     setCurrentValue(CurrentTotalValue(portfolioAssets));
     setInitialValue(initialTotalValue(portfolioAssets));
@@ -53,7 +52,7 @@ const PortfolioCard = ({
         // data-bs-toggle="modal"
         // data-bs-target={`#${modalId}`}
         onClick={() => setShowPortfolioModal(true)}
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: "pointer" }}
       >
         {portfolioName}
       </div>
@@ -81,23 +80,31 @@ const PortfolioCard = ({
         )
       )}
 
-
       {/* Portfolio Modal */}
 
-      <Modal style={{ minWidth: "890px" }} backdrop="static" show={showPotforlioModal} onHide={() => setShowPortfolioModal(false)}>
+      <Modal
+        style={{ minWidth: "890px" }}
+        backdrop="static"
+        show={showPotforlioModal}
+        onHide={() => setShowPortfolioModal(false)}
+      >
         <Modal.Header closeButton>
           <Modal.Title> {portfolioName}</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Modal.Body
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
           {portfolioAssets.map((portfolioAsset) => {
             if (portfolioAsset.portfolio_id === portfolioId) {
               return (
-
                 <AssetSummary
                   key={portfolioAsset.id}
                   assetName={portfolioAsset.asset_name}
                   assetSymbol={portfolioAsset.symbol}
-
                   datePurchased={portfolioAsset.date_purchased}
                   dateSell={portfolioAsset.date_sell}
                   quantity={portfolioAsset.quantity_purchase}
@@ -118,20 +125,15 @@ const PortfolioCard = ({
           {/* <Button variant="secondary" onClick={handleToggleAssetModal}>
             Close
           </Button> */}
-
         </Modal.Footer>
       </Modal>
-
 
       {/* AddAsset Component */}
       <AddAsset
         portfolioId={portfolioId}
         portfolioName={portfolioName}
-
-
         showAssetModal={showAssetModal}
         handleToggleAssetModal={handleToggleAssetModal}
-
       />
     </div>
   );

@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { register , login} from "../../services/authServices";
 
-
-import Modal from 'react-modal';
-// import password validator
 
 export const Register = () => {
     const [email, setEmail] = useState('');
