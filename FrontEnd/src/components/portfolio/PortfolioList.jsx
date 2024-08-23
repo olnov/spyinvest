@@ -75,10 +75,10 @@ const PortfolioList = () => {
 
   return (
     <div>
-      <Dashboard assets={assets}/>
+      <Dashboard assets={assets} />
       <h1>Portfolios</h1>
-      
-      <Accordion flush>
+
+      <Accordion>
         {portfolios.map((portfolio, index) => (
           <Accordion.Item eventKey={index.toString()} key={portfolio.id}>
             <Accordion.Header className="acc-header">
@@ -90,37 +90,39 @@ const PortfolioList = () => {
               >
                 Add an Asset
               </button> */}
+
+
+
               <PortfolioCard
                 key={portfolio.id}
-              portfolioId={portfolio.id}
-              portfolioName={portfolio.title}
-              portfolioDescription={portfolio.description}
-              portfolioAssets={portfolioAssetsState.filter((portfolioAsset) => portfolioAsset.portfolio_id === portfolio.id)}
-              fetchPortfolioAssets={fetchPortfolioAssets}
-
-              >
-
-
-              </PortfolioCard>
+                portfolioId={portfolio.id}
+                portfolioName={portfolio.title}
+                portfolioDescription={portfolio.description}
+                portfolioAssets={portfolioAssetsState.filter((portfolioAsset) => portfolioAsset.portfolio_id === portfolio.id)}
+                fetchPortfolioAssets={fetchPortfolioAssets}
+              />
             </Accordion.Header>
             <Accordion.Body>
               {assets.map((portfolioAsset) => {
                 if (portfolioAsset.portfolio_id === portfolio.id) {
                   return (
                     <>
-                      <AssetSummary
-                  key={portfolioAsset.id}
-                  assetName={portfolioAsset.asset_name}
-                  assetSymbol={portfolioAsset.symbol}
-                  datePurchased={portfolioAsset.date_purchased}
-                  dateSell={portfolioAsset.date_sell}
-                  quantity={portfolioAsset.quantity_purchase}
-                  qtysell={portfolioAsset.quantity_sell}
-                  buyingPrice={portfolioAsset.price_buy}
-                  sellingPrice={portfolioAsset.price_sell}
-                  portAssetId={portfolioAsset.port_asset_id}
-                  currentPrice = {portfolioAsset.currentPrice}
-                  />
+                      <div style={{ display: "inline-block", margin: "0.5vw", alignItems: "start", flexWrap: "wrap" }} >
+
+                        <AssetSummary
+                          key={portfolioAsset.id}
+                          assetName={portfolioAsset.asset_name}
+                          assetSymbol={portfolioAsset.symbol}
+                          datePurchased={portfolioAsset.date_purchased}
+                          dateSell={portfolioAsset.date_sell}
+                          quantity={portfolioAsset.quantity_purchase}
+                          qtysell={portfolioAsset.quantity_sell}
+                          buyingPrice={portfolioAsset.price_buy}
+                          sellingPrice={portfolioAsset.price_sell}
+                          portAssetId={portfolioAsset.port_asset_id}
+                          currentPrice={portfolioAsset.currentPrice}
+                        />
+                      </div >
 
 
                     </>
@@ -146,6 +148,10 @@ const PortfolioList = () => {
         ))}
 
       </Accordion>
+      <br>
+      </br>
+      <br>
+      </br>
 
 
 

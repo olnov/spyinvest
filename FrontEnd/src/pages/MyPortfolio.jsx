@@ -5,6 +5,10 @@ import { createPortfolio } from "../services/PortfoliosServices";
 import { TopBar } from "../components/TopBar/TopBar";
 import { getUserProfile } from "../services/userServices";
 
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 // My portfolio  -> portfolio list  | create portfolio
 
 const MyPortfolio = () => {
@@ -18,14 +22,14 @@ const MyPortfolio = () => {
       const profile = await getUserProfile(token, currentUserId);
       const terms_accepted = profile.terms_accepted;
       setTermsAccepted(profile.terms_accepted);
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
   }
 
-  useEffect(()=> {
+  useEffect(() => {
     checkTerms();
-  },[]);
+  }, []);
 
   if (termsAccepted === null) {
     // While we are checking the terms, we can show a loading spinner or nothing
@@ -36,8 +40,8 @@ const MyPortfolio = () => {
     // If terms are not accepted, prevent the page from rendering
     return (
       <>
-      <TopBar />
-      <div><h5>You must accept the terms of use to access your portfolio.</h5></div>
+        <TopBar />
+        <div><h5>You must accept the terms of use to access your portfolio.</h5></div>
       </>
     )
   }
@@ -66,8 +70,20 @@ const MyPortfolio = () => {
         <PortfolioList />
       </div>
       <button data-bs-toggle="modal" data-bs-target="#create-portfolio-modal">
-        Create Portfolio
+        New Portfolio
       </button>
+      <div style={{ marginBottom: "10vh" }}></div>
+
+
+      {/* <Form.Group className="mb-3" controlId="asset_symbol">
+        <Form.Label>Asset Symbol</Form.Label>
+        <Form.Control type="text" placeholder="Enter symbol exact match" value={formData.asset_symbol} onChange={handleChange} /> */}
+      {/* <Form.Text className="text-muted">
+              Enter symbol exact match
+            </Form.Text> */}
+      {/* </Form.Group> */}
+
+
 
       <div
         className="modal fade"
