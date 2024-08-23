@@ -17,7 +17,11 @@ const AddAsset = (props) => {
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
-      case "quantity":
+      case 'asset_symbol':
+        setFormData({ ...formData, asset_symbol: value.toUpperCase() });
+        break;
+      case 'quantity':
+
         setFormData({ ...formData, quantity: parseInt(value) });
         break;
       case "buying_price":
@@ -68,16 +72,20 @@ const AddAsset = (props) => {
           <Modal.Title>Add Asset</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form
-            onSubmit={handleSubmit}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-evenly",
-              gap: "1rem",
-            }}
-          >
-            <div style={{ display: "flex", flex: "2", gap: "20px" }}>
+          {/* <form onSubmit={handleSubmit}>
+          <input id="asset_name" type='text' placeholder='Asset Name' required value={formData.asset_name} onChange={handleChange} />
+          <input id="asset_symbol" type='text' placeholder='Asset Symbol' required value={formData.asset_symbol} onChange={handleChange} />
+          <input id="date_purchased" type='date' placeholder='Date Purchased' required value={formData.date_purchased} onChange={handleChange} />
+          <input id="date_sell" type='date' placeholder='Date Sell' value={formData.date_sell} onChange={handleChange} />
+          <input id="quantity" type='number' placeholder='Quantity' required value={formData.quantity} onChange={handleChange} />
+          <input id="buying_price" type='number' placeholder='Buying Price' required value={formData.buying_price} onChange={handleChange} />
+          <input id="selling_price" type='number' placeholder='Selling Price' value={formData.selling_price} onChange={handleChange} />
+          <input id="quantity_sell" type='number' placeholder='Quantity Sold' value={formData.quantity_sell} onChange={handleChange} />
+          <button type='submit'>Add</button>
+        </form> */}
+
+          <Form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", justifyContent: "space-evenly", gap: "1rem" }}>
+            <div style={{ display: 'flex', flex: "2", gap: "1vw" }}>
               <Form.Group className="mb-3" controlId="asset_name">
                 <Form.Label>Asset Name</Form.Label>
                 <Form.Control
@@ -90,34 +98,28 @@ const AddAsset = (props) => {
 
               <Form.Group className="mb-3" controlId="asset_symbol">
                 <Form.Label>Asset Symbol</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter symbol exact match"
-                  value={formData.asset_symbol}
-                  onChange={handleChange}
-                />
+                <Form.Control type="text" placeholder="Enter exact match" value={formData.asset_symbol} onChange={handleChange} />
+                {/* <Form.Text className="text-muted">
+              Enter symbol exact match
+            </Form.Text> */}
               </Form.Group>
             </div>
 
-            <div style={{ display: "flex", flex: "3", gap: "20px" }}>
+
+            <div style={{ display: 'flex', flex: "3", gap: "1vw" }}>
               <Form.Group className="mb-3" controlId="date_purchased">
-                <Form.Label>Date purchased</Form.Label>
-                <Form.Control
-                  type="date"
-                  placeholder="Date purchased"
-                  value={formData.date_purchased}
-                  onChange={handleChange}
-                />
+                <Form.Label>Date Purchased</Form.Label>
+                <Form.Control type="date" placeholder="Date purchased" value={formData.date_purchased} onChange={handleChange} />
+                {/* <Form.Text className="text-muted">
+              Enter symbol exact match
+            </Form.Text> */}
               </Form.Group>
               <Form.Group className="mb-3" controlId="quantity">
-                <Form.Label>Quantity</Form.Label>
-                <Form.Control
-                  min="1"
-                  type="number"
-                  placeholder="Quantity"
-                  value={formData.quantity}
-                  onChange={handleChange}
-                />
+                <Form.Label>Quantity Bought</Form.Label>
+                <Form.Control min="1" type="number" placeholder="Quantity" value={formData.quantity} onChange={handleChange} />
+                {/* <Form.Text className="text-muted">
+              Enter symbol exact match
+              </Form.Text> */}
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="buying_price">
@@ -131,16 +133,13 @@ const AddAsset = (props) => {
                 />
               </Form.Group>
             </div>
-
-            <div style={{ display: "flex", flex: "3", gap: "20px" }}>
+            <div style={{ display: 'flex', flex: "3", gap: "1vw" }}>
               <Form.Group className="mb-3" controlId="date_sell">
-                <Form.Label>Date sell</Form.Label>
-                <Form.Control
-                  type="date"
-                  placeholder="Date sell"
-                  value={formData.date_sell}
-                  onChange={handleChange}
-                />
+                <Form.Label>Date Sold</Form.Label>
+                <Form.Control type="date" placeholder="Date Sold" value={formData.date_sell} onChange={handleChange} />
+                {/* <Form.Text className="text-muted">
+              Enter symbol exact match
+            </Form.Text> */}
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="quantity_sell">

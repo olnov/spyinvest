@@ -4,6 +4,10 @@ import CreatePortfolioForm from "../components/input/CreatePortfolioForm";
 import { createPortfolio } from "../services/PortfoliosServices";
 import { getUserProfile } from "../services/userServices";
 import { TopBar } from "../components/TopBar/TopBar";
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 // My portfolio  -> portfolio list  | create portfolio
 
 const MyPortfolio = () => {
@@ -34,11 +38,8 @@ const MyPortfolio = () => {
     // If terms are not accepted, prevent the page from rendering
     return (
       <>
-        {/* <TopBar /> */}
-
-        <div>
-          <h5>You must accept the terms of use to access your portfolio.</h5>
-        </div>
+        <TopBar />
+        <div><h5>You must accept the terms of use to access your portfolio.</h5></div>
       </>
     );
   }
@@ -66,8 +67,20 @@ const MyPortfolio = () => {
         <PortfolioList />
       </div>
       <button data-bs-toggle="modal" data-bs-target="#create-portfolio-modal">
-        Create Portfolio
+        New Portfolio
       </button>
+      <div style={{ marginBottom: "10vh" }}></div>
+
+
+      {/* <Form.Group className="mb-3" controlId="asset_symbol">
+        <Form.Label>Asset Symbol</Form.Label>
+        <Form.Control type="text" placeholder="Enter symbol exact match" value={formData.asset_symbol} onChange={handleChange} /> */}
+      {/* <Form.Text className="text-muted">
+              Enter symbol exact match
+            </Form.Text> */}
+      {/* </Form.Group> */}
+
+
 
       <div
         className="modal fade"

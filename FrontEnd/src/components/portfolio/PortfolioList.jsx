@@ -71,7 +71,6 @@ const PortfolioList = () => {
       <Accordion flush>
         {portfolios.map((portfolio, index) => (
           <Accordion.Item eventKey={index.toString()} key={portfolio.id}>
-            <Accordion.Header className="acc-header">
               <PortfolioCard
                 key={portfolio.id}
                 portfolioId={portfolio.id}
@@ -89,19 +88,21 @@ const PortfolioList = () => {
                 if (portfolioAsset.portfolio_id === portfolio.id) {
                   return (
                     <>
-                      <AssetSummary
-                        key={portfolioAsset.id}
-                        assetName={portfolioAsset.asset_name}
-                        assetSymbol={portfolioAsset.symbol}
-                        datePurchased={portfolioAsset.date_purchased}
-                        dateSell={portfolioAsset.date_sell}
-                        quantity={portfolioAsset.quantity_purchase}
-                        qtysell={portfolioAsset.quantity_sell}
-                        buyingPrice={portfolioAsset.price_buy}
-                        sellingPrice={portfolioAsset.price_sell}
-                        portAssetId={portfolioAsset.port_asset_id}
-                        currentPrice={portfolioAsset.currentPrice}
-                      />
+                      <div style={{ display: "inline-block", margin: "0.5vw", alignItems: "start", flexWrap: "wrap" }} >
+                        <AssetSummary
+                          key={portfolioAsset.id}
+                          assetName={portfolioAsset.asset_name}
+                          assetSymbol={portfolioAsset.symbol}
+                          datePurchased={portfolioAsset.date_purchased}
+                          dateSell={portfolioAsset.date_sell}
+                          quantity={portfolioAsset.quantity_purchase}
+                          qtysell={portfolioAsset.quantity_sell}
+                          buyingPrice={portfolioAsset.price_buy}
+                          sellingPrice={portfolioAsset.price_sell}
+                          portAssetId={portfolioAsset.port_asset_id}
+                          currentPrice={portfolioAsset.currentPrice}
+                        />
+                      </div >
                     </>
                   );
                 }
@@ -121,7 +122,11 @@ const PortfolioList = () => {
           </Accordion.Item>
         ))}
       </Accordion>
-    </div>
+      <br>
+      </br>
+      <br>
+      </br>
+    </div >
   );
 };
 
