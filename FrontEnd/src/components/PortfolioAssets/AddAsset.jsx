@@ -19,6 +19,9 @@ const AddAsset = (props) => {
   const handleChange = (e) => {
     const { id, value } = e.target;
     switch (id) {
+      case 'asset_symbol':
+        setFormData({ ...formData, asset_symbol: value.toUpperCase() });
+        break;
       case 'quantity':
         setFormData({ ...formData, quantity: parseInt(value) });
         break;
@@ -75,7 +78,7 @@ const AddAsset = (props) => {
 
           <Form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", justifyContent: "space-evenly", gap: "1rem" }}>
 
-            <div style={{ display: 'flex', flex: "2", gap: "20px" }}>
+            <div style={{ display: 'flex', flex: "2", gap: "1vw" }}>
               <Form.Group className="mb-3" controlId="asset_name">
                 <Form.Label>Asset Name</Form.Label>
                 <Form.Control type="text" placeholder="Enter the name of the company" value={formData.asset_name} onChange={handleChange} />
@@ -86,7 +89,7 @@ const AddAsset = (props) => {
 
               <Form.Group className="mb-3" controlId="asset_symbol">
                 <Form.Label>Asset Symbol</Form.Label>
-                <Form.Control type="text" placeholder="Enter symbol exact match" value={formData.asset_symbol} onChange={handleChange} />
+                <Form.Control type="text" placeholder="Enter exact match" value={formData.asset_symbol} onChange={handleChange} />
                 {/* <Form.Text className="text-muted">
               Enter symbol exact match
             </Form.Text> */}
@@ -94,9 +97,9 @@ const AddAsset = (props) => {
             </div>
 
 
-            <div style={{ display: 'flex', flex: "3", gap: "20px" }}>
+            <div style={{ display: 'flex', flex: "3", gap: "1vw" }}>
               <Form.Group className="mb-3" controlId="date_purchased">
-                <Form.Label>Date purchased</Form.Label>
+                <Form.Label>Date Purchased</Form.Label>
                 <Form.Control type="date" placeholder="Date purchased" value={formData.date_purchased} onChange={handleChange} />
                 {/* <Form.Text className="text-muted">
               Enter symbol exact match
@@ -106,7 +109,7 @@ const AddAsset = (props) => {
 
 
               <Form.Group className="mb-3" controlId="quantity">
-                <Form.Label>Quantity</Form.Label>
+                <Form.Label>Quantity Bought</Form.Label>
                 <Form.Control min="1" type="number" placeholder="Quantity" value={formData.quantity} onChange={handleChange} />
                 {/* <Form.Text className="text-muted">
               Enter symbol exact match
@@ -122,10 +125,10 @@ const AddAsset = (props) => {
               </Form.Group>
             </div>
 
-            <div style={{ display: 'flex', flex: "3", gap: "20px" }}>
+            <div style={{ display: 'flex', flex: "3", gap: "1vw" }}>
               <Form.Group className="mb-3" controlId="date_sell">
-                <Form.Label>Date sell</Form.Label>
-                <Form.Control type="date" placeholder="Date sell" value={formData.date_sell} onChange={handleChange} />
+                <Form.Label>Date Sold</Form.Label>
+                <Form.Control type="date" placeholder="Date Sold" value={formData.date_sell} onChange={handleChange} />
                 {/* <Form.Text className="text-muted">
               Enter symbol exact match
             </Form.Text> */}

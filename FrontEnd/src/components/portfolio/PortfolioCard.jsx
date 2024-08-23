@@ -2,7 +2,7 @@
 
 import Context from '../../context/Context';
 import { useContext, useEffect, useState } from 'react';
-import { CurrentTotalValue, initialTotalValue, calculateBigWin, calculateBigLoss,  calculatePandL} from '../../utils/PortfolioCalucations'
+import { CurrentTotalValue, initialTotalValue, calculateBigWin, calculateBigLoss, calculatePandL } from '../../utils/PortfolioCalucations'
 
 
 import AssetSummary from '../PortfolioAssets/AssetSummary';
@@ -37,7 +37,7 @@ const PortfolioCard = ({
 
 
 
-  
+
   useEffect(() => {
     setCurrentValue(CurrentTotalValue(portfolioAssets));
     setInitialValue(initialTotalValue(portfolioAssets));
@@ -57,7 +57,7 @@ const PortfolioCard = ({
       >
         {portfolioName}
       </div>
-      <div className="port-card__description">{}</div>
+      <div className="port-card__description">{ }</div>
       <div className="port-card__total-investment"> Initial Value: ${initialValue}</div>
       <div className="port-card__current-value">Current Value: ${currentValue}</div>
       <div className="port-card__biggest-winner"> Biggest Winner: {bigWin} </div>
@@ -65,13 +65,13 @@ const PortfolioCard = ({
       {pandL > 0 ? (
         <>
           <div className="port-card__p"> Profit: ${pandL} </div>
-          <div className="port-card__perc-p">{(pandL*100/initialValue).toFixed(2)} %</div>
+          <div className="port-card__perc-p">{(pandL * 100 / initialValue).toFixed(2)} %</div>
         </>
       ) : (
         pandL < 0 ? (
           <>
             <div className="port-card__l"> Loss: ${pandL} </div>
-            <div className="port-card__perc_l">{(pandL*100/initialValue).toFixed(2)} %</div>
+            <div className="port-card__perc_l">{(pandL * 100 / initialValue).toFixed(2)} %</div>
           </>
         ) : (
           <>
@@ -128,7 +128,7 @@ const PortfolioCard = ({
         portfolioId={portfolioId}
         portfolioName={portfolioName}
 
-        
+
         showAssetModal={showAssetModal}
         handleToggleAssetModal={handleToggleAssetModal}
 
