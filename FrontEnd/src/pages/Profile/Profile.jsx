@@ -61,7 +61,7 @@ export const Profile = ()=> {
             console.log("Terms:", terms);
             const result = await updateUserProfile(token, currentUserId, name, surname, birth_date, terms);
             if (result.success) {
-                setMessage("Chages saved");
+                setMessage("Changes saved");
                 setTimeout(() => {
                     navigate('/portfolios'); 
                 }, 2000);
