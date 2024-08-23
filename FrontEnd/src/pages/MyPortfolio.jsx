@@ -66,9 +66,9 @@ const MyPortfolio = () => {
       <div className="portfolio-list">
         <PortfolioList />
       </div>
-      <button variant="primary" data-bs-toggle="modal" data-bs-target="#create-portfolio-modal">
+      <Button variant="primary" data-bs-toggle="modal" data-bs-target="#create-portfolio-modal">
         New Portfolio
-      </button>
+      </Button>
       <div style={{ marginBottom: "10vh" }}></div>
 
 
