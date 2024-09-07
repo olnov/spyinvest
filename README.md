@@ -6,6 +6,10 @@ Welcome to **SpyInvest**, where you have a license to invest!
 
 SpyInvest is a powerful investment management tool that allows users to create and manage multiple portfolios. Within each portfolio, users can add various assets, and the application will fetch real-time market prices using APIs. With SpyInvest, you can effortlessly monitor the performance of your investments, including total profit and loss for all your portfolios, as well as detailed insights into individual assets.
 
+## Demo
+1. Silent Demo - [link](https://www.youtube.com/watch?v=nvgLSHp-UZ0&t=15s)
+2. Makers DemoDay - [link](https://www.youtube.com/watch?v=DC7jrA9d4vU)
+
 ## Features
 
 - **Multiple Portfolios:** Manage several portfolios, each with its own set of assets.
