@@ -63,6 +63,16 @@ export const TopBar = () => {
                       Profile settings
                     </a>
                   </li>
+
+                  <li className="nav-item">
+                    <a
+                      className="nav-link fs-5"
+                      aria-current="page"
+                      href={"/news"}
+                    >
+                      News
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>

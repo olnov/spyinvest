@@ -43,8 +43,9 @@ const Dashboard = (props) => {
 
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-title-top">My Portfolios</h1>
-
+      {/* <h1 className="dashboard-title-top">My Porftolios</h1> */}
+      <h5>Portfolios summary</h5>
+      <span></span>
       {totalPandL > 0 ? (
         <h1 className="dashboard-title">
           Total Value: ${totalCurrentValue}

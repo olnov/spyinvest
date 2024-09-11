@@ -50,3 +50,23 @@ export const fetchAssetsandCurrentPrices = async (token) => {
     }
     return fetchedAssets
 };
+
+export const searchByDescription = async (token,description) => {
+    const requestBody = { description }
+    const requestOptions = {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      };
+    try{
+        const response = await fetch(`${BACKEND_URL}/assets/description`,requestOptions);
+        const data = await response.json();
+        console.log("Suggestions:", data);
+        return data;
+    }catch(error){
+        console.log("Error getting data from aseets:",error);
+    }
+}

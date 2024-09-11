@@ -8,6 +8,8 @@ import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 import Profile from "./pages/Profile/Profile";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Sandbox } from "./pages/Sandbox/Sandbox";
+import { NewsPage } from "./pages/NewsPage/NewsPage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
   {
     path: "/profile/:id",
     element: <Profile />,
+  },
+  {
+    path: "/sandbox",
+    element: <Sandbox />,
+  },
+  {
+    path: "/news",
+    element: <NewsPage />,
   },
 ]);
 function App() {

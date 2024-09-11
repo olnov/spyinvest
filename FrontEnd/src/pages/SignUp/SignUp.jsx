@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { register, login } from "../../services/authServices";
 import "./SignUp.css";
@@ -46,6 +46,14 @@ export const SignUp = () => {
       alert(error);
     }
   };
+
+  //Add background
+  useEffect(() => {
+    document.body.classList.add('page-background');
+    return () => {
+        document.body.classList.remove('page-background');
+    };
+    },[]);
 
   return (
     <>
